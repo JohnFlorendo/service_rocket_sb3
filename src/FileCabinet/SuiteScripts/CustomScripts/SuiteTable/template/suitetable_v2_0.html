@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.1.4/css/rowGroup.bootstrap5.min.css">
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> <!-- Data Tables -->
+	<script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script> <!-- Data Tables -->
+	<script src="https://cdn.datatables.net/rowgroup/1.1.4/js/dataTables.rowGroup.min.js"></script> <!-- Data Tables -->
+
+   <style type="text/css">
+      * {
+         font-size: 14px;
+         box-sizing: border-box;
+      }
+
+      ol,
+      ul {
+         padding-left: 0rem !important;
+      }
+
+      .nav {
+         display: flex !important;
+      }
+
+      .tab-content {
+         padding-left: 20px !important;
+      }
+
+      .table-caption {
+         caption-side: top;
+         width: auto;
+         text-align: center
+      }
+
+      .pagination {
+         display: flex !important;
+         list-style: none !important;
+      }
+
+      .noaccess {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+      }
+
+      .notice {
+         padding: 15px;
+         background-color: #fafafa;
+         border-left: 6px solid #7f7f84;
+         margin-bottom: 10px;
+         -webkit-box-shadow: 0 5px 8px -6px rgba(0, 0, 0, .2);
+         -moz-box-shadow: 0 5px 8px -6px rgba(0, 0, 0, .2);
+         box-shadow: 0 5px 8px -6px rgba(0, 0, 0, .2);
+      }
+
+      .notice-red {
+         padding: 10px;
+         font-size: 100%;
+         border-color: #FF0000;
+      }
+
+      .notice-red {
+         border-color: #FF0000;
+      }
+
+      .notice-red>strong {
+         font-size: 150%;
+         color: #FF0000;
+      }
+
+      .notice-amber {
+         padding: 10px;
+         font-size: 100%;
+         border-color: #FFBF00;
+      }
+
+      .notice-amber {
+         border-color: #FFBF00;
+      }
+
+      .notice-amber>strong {
+         font-size: 150%;
+         color: #FFBF00;
+      }
+
+      .notice-green {
+         padding: 10px;
+         font-size: 100%;
+         border-color: #00B300;
+      }
+
+      .notice-green {
+         border-color: #00B300;
+      }
+
+      .notice-green>strong {
+         font-size: 150%;
+         color: #00B300;
+      }
+
+      .amount-label {}
+
+       select.form-control {
+         display: inline;
+         width: 200px;
+         margin-left: 25px;
+      }
+      tr.odd td:first-child,
+	  tr.even td:first-child {
+		    padding-left: 4em;
+	  }
+      
+   </style>
+   <script type="text/javascript">
+   $(document).ready(function() {
+   	
+       $.get('/app/site/hosting/scriptlet.nl?script=1483&deploy=1&action=backend&stbl={{id}}', function (data) {
+       	
+           $('#table-suiteable').DataTable({
+           		responsive: true,	
+              	data: data.data,
+              	columns: data.header,
+              	pageLength: 25,
+	           	columnDefs: [{
+	                'visible': false,
+	                'targets': data.group
+	           	}],
+	           	rowGroup: {
+	                dataSrc: data.group
+	           	}
+           });
+           
+           $('.uir-record-type').text(data.name);
+
+        }, 'json');
+        
+   });
+   </script>
+</head>
+
+<body>
+   <div id="suitetable-container" class="p-2 container">
+
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="list-style-type:none!important">
+         <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+               role="tab" aria-controls="home" aria-selected="true">Home</button>
+         </li>
+         <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+               role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+         </li>
+         <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+               role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+         </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+         	<div class='container'>
+	         	<table id="table-suiteable" class="table table-striped" style="width:100%">
+	               <caption class="table-caption">
+	                  <h4>Test</h4>
+	               </caption>
+	            </table>
+         	</div>
+         </div>
+         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+      </div>
+   </div>
+</body>
+
+</html>

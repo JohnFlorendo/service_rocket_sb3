@@ -1,0 +1,354 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Job Profile</title>
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/assets/dashboard_portlets/2782337335.css?NS_VER=2020.2.0&minver=139" />
+      <style>
+         body {
+         background-color: #eff1f5;
+         font-size: 12px;
+         font-family: Tahoma;
+         color: #4d5f79;
+         }
+         .button-container {
+         display: flex;
+         flex-direction: row;
+         }
+         .ns-button {
+         margin: 0 12px 0 0;
+         padding: 9px 32px 8px 33px;
+         border-radius: 3px;
+         border: solid 1px #607799;
+         background-color: #ffffff;
+         color: #4d5f79;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         }
+         .container {
+         width: 100%;
+         }
+         .header {
+         padding: 12px;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         }
+         .row{
+         margin-top:40px;
+         padding: 0 10px;
+         width: 100%;
+         }
+         .clickable{
+         cursor: pointer;   
+         }
+         .panel-primary {
+         padding: 12px 12px 12px 12px;
+         border-radius: 5px;
+         box-shadow: 0 0 8px 0 rgba(195, 195, 195, 0.5);
+         background-color: #ffffff;
+         border: 0;
+         }
+         .panel-heading {
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         padding-bottom: 16px;
+         padding-top: 16px;
+         }
+         .panel-primary>.panel-heading {
+         background-color: unset;
+         border-color: 0;
+         border-bottom: 0;
+         letter-spacing: 1.19px;
+         color: #47617c;
+         }
+         .panel-primary>.panel-heading>.panel-title {
+         font-size: 20px;
+         font-weight: 600;
+         }
+         .panel-heading span {
+         margin-left: 8px;
+         font-size: 15px;  
+         letter-spacing: 1.19px;
+         color: #47617c;          
+         font-weight: 100;
+         }
+         .panel.panel-primary.secondary {
+         border: 2px solid #eff1f5;
+         box-shadow: unset;
+         }
+         h4.panel-subtitle {
+         font-size: 15px;
+         font-weight: bold;
+         color: #47617c;
+         margin: unset;
+         }
+         .tertiary {
+         color: #4d5f79 !important;
+         background-color: unset !important;
+         border-color: #eff1f5 !important;
+         }
+         .panel-info {
+         border-color: #eff1f5;
+         }
+         .tabbed-body {
+         padding-top: 4px;
+         padding-left: 60px;
+         padding-right: 16px;
+         }
+         h5, .h5 {
+         font-size: 14px;
+         font-weight: 700;
+         margin: unset;
+         color: #47617c;
+         }
+         .inner-card {
+         padding-top: 2px;
+         padding-bottom: 2px;
+         }
+         .inner-card>.panel-group {
+         margin-bottom: unset;
+         }
+         .owner-container {
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         }
+         .owner-label {
+         margin-left: 4px;
+         display: flex;
+         flex-direction: row;
+         }
+         .jobs {
+         display: flex;
+         flex-direction: column;
+         padding-top: 8px;
+         padding-bottom: 8px;
+         }
+         .competencies-header {
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         flex-direction: row;
+         }
+         .competencies {
+         border: 1px solid #eff1f5;
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         flex-direction: row;
+         }
+         .activity {
+         border: 1px solid #eff1f5;
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         display: flex;
+         flex-direction: row;
+         }
+         .circle {
+         border-radius: 50%;
+         width: 50px;
+         height: 50px;
+         border: 1px solid #47617c;
+         margin-right: 10px;
+         }
+         .people-in-jobs {
+         display: flex;
+         flex-direction: row;
+         align-content: space-between;
+         }
+         div.minimalistBlack {
+         border: 0px solid #000000;
+         width: 100%;
+         text-align: left;
+         border-collapse: collapse;
+         }
+         .divtable.minimalistBlack .divtableCell, .divtable.minimalistBlack .divtableHead {
+         border: 1px solid #eff1f5;
+         padding: 5px 4px;
+         }
+         .divtable.minimalistBlack .divtableBody .divtableCell {
+         text-align: center;
+         font-size: 12px;
+         }
+         .divtable.minimalistBlack .divtableHeading {
+         background: #CFCFCF;
+         }
+         .divtable.minimalistBlack .divtableHeading .divtableHead {
+         font-weight: bold;
+         text-align: center;
+         }
+         .minimalistBlack .tableFootStyle {
+         font-size: 14px;
+         }
+         .divtable{ display: table; }
+         .divtableRow { display: table-row; }
+         .divtableHeading { display: table-header-group;}
+         .divtableCell, .divtableHead { display: table-cell;}
+         .divtableHeading { display: table-header-group;}
+         .divtableFoot { display: table-footer-group;}
+         .divtableBody { display: table-row-group;}
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script type="text/javascript">$(document).on('click', '.panel-heading span.clickable', 
+         function(e){
+         
+          		var $this = $(this);
+          		if(!$this.hasClass('panel-collapsed')) {
+          			
+          		   $this.addClass('panel-collapsed');
+                 $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+          		} 
+          		else {
+          		
+          			$this.removeClass('panel-collapsed');
+          			$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+          		}
+          	})
+      </script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="row" style="max-width: 1000px;">
+            <div class="panel panel-primary">
+               <!--Job Profile Heading-->
+               <div class="panel-heading">
+                  <h3 class="panel-title"><b>Job Profile: </b><a href="/app/hcm/hris/job.nl?id={{this.id}}" target="_blank">{{title}}</a></h3>
+                  <h4>Job Id: <a href="/app/hcm/hris/job.nl?id={{id}}" target="_blank">{{id}}</a></h4>
+                  <h4>Department: {{department}}</h4>
+               </div>
+               <div class="panel-body">
+                  <p>{{custrecord_js_objective}}</p>
+               </div>
+               <!--Job Profile Heading-->
+               <div class="panel-body inner-card">
+                  <div class="panel panel-info">
+                     <div class="jobs tabbed-body">
+                        <h5>Responsibilities</h5>
+                        <div class="competencies">
+                           <div class="divtable minimalistBlack">
+						   {{{custrecord_sr_job_responsibilities}}}					
+                           </div>
+                        </div>
+                     </div>
+                     <div class="jobs tabbed-body">
+                        <h5>Qualifications</h5>
+                        <div class="competencies">
+                           <div class="divtable minimalistBlack">
+							{{{custrecordsr_job_qualifications}}}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="jobs tabbed-body">
+                        <h5>Skills</h5>
+                        <div class="competencies">
+                           <div class="divtable minimalistBlack">
+							{{{custrecord_sr_job_skills}}}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="jobs tabbed-body">
+                        <h5>Functions</h5>
+                        {{#each functions}}
+                        <div class="jobs tabbed-body">
+                           <h5>{{identifier}}: {{name}}</h5>
+                           {{#each activities}}
+                           
+                           
+                           <div class="activity">
+                              <a href="/app/common/custom/custrecordentry.nl?rectype=1199&id={{id}}&e=T" target="_blank">
+                              <img border="0" src="/images/dashboard/edit.svg" width="20" height="20">
+                              </a>{{identifier}}: {{description}}
+                           </div>
+                           
+                           {{/each}}
+                        </div>
+                        {{/each}}
+                     </div>
+                     <div class="jobs tabbed-body">
+                        <h5>Job Openings</h5>
+                        {{#each jobrequisition}}
+                        <div class="activity">
+                           <div class="divtable minimalistBlack">
+                              <div class="divtableHeading">
+                                 <div class="divtableRow">
+                                    <div class="divtableHead">Title</div>
+                                    <div class="divtableHead">Class</div>
+                                    <div class="divtableHead">Department</div>
+                                    <div class="divtableHead">Hiring Manager</div>
+                                    <div class="divtableHead">Recruiter</div>
+                                    <div class="divtableHead">Description</div>
+                                    <div class="divtableHead">Status</div>
+                                    <div class="divtableHead">Target Date</div>
+                                    <div class="divtableHead">Hiring Location</div>
+                                    <div class="divtableHead">Refer</div>
+                                    <div class="divtableHead">Apply</div>
+                                 </div>
+                              </div>
+                              <div class="divtableBody">
+                                 <div class="divtableRow">
+                                    <div class="divtableCell">{{title}}</div>
+                                    <div class="divtableCell">{{class}}</div>
+                                    <div class="divtableCell">{{department}}</div>
+                                    <div class="divtableCell">{{manager}}</div>
+                                    <div class="divtableCell">{{recruiter}}</div>
+                                    <div class="divtableCell">{{description}}</div>
+                                    <div class="divtableCell">{{status}}</div>
+                                    <div class="divtableCell">{{target}}</div>
+                                    <div class="divtableCell">{{locations}}</div>
+                                    <div class="divtableCell">{{refer}}</div>
+                                    <div class="divtableCell">{{apply}}</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        {{else}}
+                        <div class="activity">
+                         There are currently no open positions in this Job Profile.
+                        </div>
+                        {{/each}}
+                     </div>
+                     <div class="jobs tabbed-body">
+                        <h5>Rocketeers</h5>
+                        {{#each rocketeers}}
+                        <div class="activity">
+                           <div class="circle">
+                           <a href="https://servicerocket.workplace.com/profile.php?id={{workplaceid}}" target="_blank">
+                           <img class="circle" border="0" src="{{image}}" width="20" height="20">
+                           </a>
+                           </div>
+                           <div>
+                              <div>
+                                 Name: {{name}}
+                              </div>
+                              <div>
+                                 Location: {{location}}
+                              </div>
+                              <div>
+                                 Business Unit: {{unit}}
+                              </div>
+                           </div>
+                        </div>
+                        {{/each}}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+   </body>
+</html>

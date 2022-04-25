@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <title>ServiceRocket Function Activity Test</title>
+   </head>
+   <body>
+<br/><br/><br/>
+   
+   
+	<div class="container">
+	
+	<div class="card" style="width: 100%;">
+         <div class="card-body">
+			<span class="badge badge-primary">{{custrecord_sr_function_department}}</span>
+            <h3 class="card-title">{{custrecord_sr_function_id}} {{name}}</h3>
+            <p class="card-text">{{custrecord_sr_function_objective}}</p>
+			{{#recmachcustrecord_sr_activity_function}}
+            <div class="card bg-outline mb-4" style="width: 100%;">
+               <div class="card-body d-flex justify-content-start align-items-center">
+                  <div>
+                     <span class="badge badge-secondary card-badge">{{@root.custrecord_sr_function_id}} {{@root.name}}</span>
+                     <p class="card-text mb-1">{{custrecord_sr_activity_description}}.</p>
+                  </div>
+               </div>
+            </div>
+			{{/recmachcustrecord_sr_activity_function}}
+         </div>
+      </div>
+	
+	</div>
+      
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   </body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/fixedcolumns/4.0.0/css/fixedColumns.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/fixedcolumns/4.0.0/js/dataTables.fixedColumns.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#table-rocketeer').DataTable({
+                ajax: "/app/site/hosting/scriptlet.nl?script=1449&deploy=1&action=backend&list=0&idme={{idme}}",
+                pageLength: 25,
+                searching: true,
+                fixedHeader: {
+                    header: true,
+                    footer: false
+                },
+                scrollY: "600px",
+                scrollX: true,
+                scrollCollapse: true,
+                fixedColumns: {
+                    left: 1
+                },
+                columns: [{
+                    "data": "name",
+                    "render": function (data, type, row, meta) {
+                        if (type === 'display') {
+                            data = '<a target="_blank" href="https://servicerocket.workplace.com/chat/t/' + row.workplaceid + '">' + data + '</a>';
+                        }
+
+                        return data;
+                    }
+                }, {
+                    "data": "empnum"
+                }, {
+                    "data": "firstname"
+                }, {
+                    "data": "lastname"
+                }, {
+                    "data": "preferredname"
+                }, {
+                    "data": "calculatedname"
+                }, {
+                    "data": "email"
+                }, {
+                    "data": "phone"
+                }, {
+                    "data": "officephone"
+                }, {
+                    "data": "mobile"
+                }, {
+                    "data": "fax"
+                }, {
+                    "data": "job"
+                }, {
+                    "data": "joblevelname"
+                }, {
+                    "data": "manager"
+                }, {
+                    "data": "manageremail"
+                }, {
+                    "data": "employeetype"
+                }, {
+                    "data": "lob"
+                }, {
+                    "data": "department"
+                }, {
+                    "data": "class"
+                }, {
+                    "data": "location"
+                }, {
+                    "data": "subsidiary"
+                }, {
+                    "data": "birthdate"
+                }, {
+                    "data": "hiredate"
+                }, {
+                    "data": "lastreviewdate"
+                }, {
+                    "data": "nextreviewdate"
+                }, {
+                    "data": "releasedate"
+                }, {
+                    "data": "employeestatus"
+                }
+                ]
+            });
+
+
+            $("#reviewrocketeers-tab").click(function () {
+
+                $('#table-review').DataTable({
+                    ajax: "/app/site/hosting/scriptlet.nl?script=1449&deploy=1&action=backend&list=1&idme={{idme}}",
+                    pageLength: 25,
+                    searching: false,
+                    fixedHeader: {
+                        header: false,
+                        footer: false
+                    },
+                    scrollY: "600px",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: {
+                        left: 1
+                    },
+                    columns: [{
+                        "data": "name",
+                        "render": function (data, type, row, meta) {
+                            if (type === 'display') {
+                                data = '<a target="_blank" href="https://servicerocket.workplace.com/chat/t/' + row.workplaceid + '">' + data + '</a>';
+                            }
+
+                            return data;
+                        }
+                    }, {
+                        "data": "empnum"
+                    }, {
+                        "data": "firstname"
+                    }, {
+                        "data": "lastname"
+                    }, {
+                        "data": "preferredname"
+                    }, {
+                        "data": "calculatedname"
+                    }, {
+                        "data": "email"
+                    }, {
+                        "data": "phone"
+                    }, {
+                        "data": "officephone"
+                    }, {
+                        "data": "mobile"
+                    }, {
+                        "data": "fax"
+                    }, {
+                        "data": "job"
+                    }, {
+                        "data": "joblevelname"
+                    }, {
+                        "data": "manager"
+                    }, {
+                        "data": "manageremail"
+                    }, {
+                        "data": "employeetype"
+                    }, {
+                        "data": "lob"
+                    }, {
+                        "data": "department"
+                    }, {
+                        "data": "class"
+                    }, {
+                        "data": "location"
+                    }, {
+                        "data": "subsidiary"
+                    }, {
+                        "data": "birthdate"
+                    }, {
+                        "data": "hiredate"
+                    }, {
+                        "data": "lastreviewdate"
+                    }, {
+                        "data": "nextreviewdate"
+                    }, {
+                        "data": "releasedate"
+                    }, {
+                        "data": "employeestatus"
+                    }]
+                });
+            });
+
+            $("#newrocketeers-tab").click(function () {
+
+                $('#table-new').DataTable({
+                    ajax: "/app/site/hosting/scriptlet.nl?script=1449&deploy=1&action=backend&list=2&idme={{idme}}",
+                    pageLength: 25,
+                    searching: false,
+                    fixedHeader: {
+                        header: false,
+                        footer: false
+                    },
+                    scrollY: "600px",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: {
+                        left: 1
+                    },
+                    "columns": [{
+                        "data": "name",
+                        "render": function (data, type, row, meta) {
+                            if (type === 'display') {
+                                data = '<a target="_blank" href="https://servicerocket.workplace.com/chat/t/' + row.workplaceid + '">' + data + '</a>';
+                            }
+
+                            return data;
+                        }
+                    }, {
+                        "data": "empnum"
+                    }, {
+                        "data": "firstname"
+                    }, {
+                        "data": "lastname"
+                    }, {
+                        "data": "preferredname"
+                    }, {
+                        "data": "calculatedname"
+                    }, {
+                        "data": "email"
+                    }, {
+                        "data": "phone"
+                    }, {
+                        "data": "officephone"
+                    }, {
+                        "data": "mobile"
+                    }, {
+                        "data": "fax"
+                    }, {
+                        "data": "job"
+                    }, {
+                        "data": "joblevelname"
+                    }, {
+                        "data": "manager"
+                    }, {
+                        "data": "manageremail"
+                    }, {
+                        "data": "employeetype"
+                    }, {
+                        "data": "lob"
+                    }, {
+                        "data": "department"
+                    }, {
+                        "data": "class"
+                    }, {
+                        "data": "location"
+                    }, {
+                        "data": "subsidiary"
+                    }, {
+                        "data": "birthdate"
+                    }, {
+                        "data": "hiredate"
+                    }, {
+                        "data": "lastreviewdate"
+                    }, {
+                        "data": "nextreviewdate"
+                    }, {
+                        "data": "releasedate"
+                    }, {
+                        "data": "employeestatus"
+                    }]
+                });
+            });
+
+
+        });
+    </script>
+    <style type="text/css">
+        * {
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        ol,
+        ul {
+            padding-left: 0rem !important;
+        }
+
+        .text ul,
+        .text ol {
+
+            margin-left: 0px !important;
+        }
+
+        .nav {
+            display: flex !important;
+        }
+
+        .tab-content {
+            padding-left: 20px !important;
+        }
+
+        .table-caption {
+            caption-side: top;
+            width: auto;
+            text-align: center
+        }
+
+        .pagination {
+            display: flex !important;
+            list-style: none !important;
+        }
+
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        div.dataTables_wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .noaccess {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container-md">
+        <div class="row mb-3">
+            <ul class="nav nav-tabs mb-3" id="hrmanagerTab" role="tablist" style="list-style-type:none;">
+
+				<li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="inbox-tab" data-bs-toggle="tab"
+                        data-bs-target="#inbox" type="button" role="tab" aria-controls="inbox"
+                        aria-selected="false">Inbox</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="rocketeers-tab" data-bs-toggle="tab"
+                        data-bs-target="#rocketeers" type="button" role="tab" aria-controls="rocketeers"
+                        aria-selected="false">Rocketeers</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviewrocketeers-tab" data-bs-toggle="tab"
+                        data-bs-target="#reviewrocketeers" type="button" role="tab" aria-controls="reviewrocketeers"
+                        aria-selected="true">Reviews</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="newrocketeers-tab" data-bs-toggle="tab" data-bs-target="#newrocketeers"
+                        type="button" role="tab" aria-controls="allowance" aria-selected="false">Onboarding</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="hrmanagerTabContent">
+            
+                <div class="tab-pane fade show active" id="inbox" role="tabpanel" aria-labelledby="inbox-tab">
+                    <div class="container">
+                        <table id="table-inbox" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="background: white!important">Task</th>
+                                    <th>Message</th>
+                                    <th>Owner</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>Due Date</th>
+                                    <th>Customer</th>
+                                    <th>Transaction</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="rocketeers" role="tabpanel" aria-labelledby="rocketeers-tab">
+                    <div class="container">
+                        <table id="table-rocketeer" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="background: white!important">Name</th>
+                                    <th>Employee #</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Preferred Name</th>
+                                    <th>Calculated Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Office Phone</th>
+                                    <th>Mobile Phone</th>
+                                    <th>Fax</th>
+                                    <th>Job Profile</th>
+                                    <th>Job Level</th>
+                                    <th>Manager</th>
+                                    <th>Manager's Email</th>
+                                    <th>Employee Type</th>
+                                    <th>Line of Business</th>
+                                    <th>Department</th>
+                                    <th>Class</th>
+                                    <th>Location</th>
+                                    <th>Subsidiary</th>
+                                    <th>Birth Date</th>
+                                    <th>Hire Date</th>
+                                    <th>Last Salary Review Date</th>
+                                    <th>Next Salary Review Date</th>
+                                    <th>Termination/Release Date</th>
+                                    <th>Employee Status</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="reviewrocketeers" role="tabpanel" aria-labelledby="reviewrocketeers-tab">
+                    <div class="container">
+
+                        <table id="table-review" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="background: white!important">Name</th>
+                                    <th>Employee #</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Preferred Name</th>
+                                    <th>Calculated Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Office Phone</th>
+                                    <th>Mobile Phone</th>
+                                    <th>Fax</th>
+                                    <th>Job Profile</th>
+                                    <th>Job Level</th>
+                                    <th>Manager</th>
+                                    <th>Manager's Email</th>
+                                    <th>Employee Type</th>
+                                    <th>Line of Business</th>
+                                    <th>Department</th>
+                                    <th>Class</th>
+                                    <th>Location</th>
+                                    <th>Subsidiary</th>
+                                    <th>Birth Date</th>
+                                    <th>Hire Date</th>
+                                    <th>Last Salary Review Date</th>
+                                    <th>Next Salary Review Date</th>
+                                    <th>Termination/Release Date</th>
+                                    <th>Employee Status</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="newrocketeers" role="tabpanel" aria-labelledby="newrocketeers-tab">
+
+                    <div class="container">
+                        <table id="table-new" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="background: white!important">Name</th>
+                                    <th>Employee #</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Preferred Name</th>
+                                    <th>Calculated Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Office Phone</th>
+                                    <th>Mobile Phone</th>
+                                    <th>Fax</th>
+                                    <th>Job Profile</th>
+                                    <th>Job Level</th>
+                                    <th>Manager</th>
+                                    <th>Manager's Email</th>
+                                    <th>Employee Type</th>
+                                    <th>Line of Business</th>
+                                    <th>Department</th>
+                                    <th>Class</th>
+                                    <th>Location</th>
+                                    <th>Subsidiary</th>
+                                    <th>Birth Date</th>
+                                    <th>Hire Date</th>
+                                    <th>Last Salary Review Date</th>
+                                    <th>Next Salary Review Date</th>
+                                    <th>Termination/Release Date</th>
+                                    <th>Employee Status</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

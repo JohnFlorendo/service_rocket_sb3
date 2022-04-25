@@ -1,0 +1,623 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Departments</title>
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/assets/dashboard_portlets/2782337335.css?NS_VER=2020.2.0&minver=139" />
+      <style>
+         body {
+         background-color: #eff1f5;
+         font-family: Tahoma;
+         color: #4d5f79;
+         }
+         .button-container {
+         display: flex;
+         flex-direction: row;
+         }
+         .ns-button {
+         margin: 0 12px 0 0;
+         padding: 9px 32px 8px 33px;
+         border-radius: 3px;
+         border: solid 1px #607799;
+         background-color: #ffffff;
+         color: #4d5f79;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         }
+         .container {
+         width: 100%;
+         }
+         .header {
+         padding: 12px;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         }
+         .row{
+         margin-top:40px;
+         padding: 0 10px;
+         width: 100%;
+         }
+         .clickable{
+         cursor: pointer;   
+         }
+         .panel-primary {
+         padding: 12px 12px 12px 12px;
+         border-radius: 5px;
+         box-shadow: 0 0 8px 0 rgba(195, 195, 195, 0.5);
+         background-color: #ffffff;
+         border: 0;
+         }
+         .panel-heading {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         padding-bottom: 16px;
+         padding-top: 16px;
+         }
+         .panel-primary>.panel-heading {
+         background-color: unset;
+         border-color: 0;
+         border-bottom: 0;
+         letter-spacing: 1.19px;
+         color: #47617c;
+         }
+         .panel-primary>.panel-heading>.panel-title {
+         font-size: 20px;
+         font-weight: 600;
+         }
+         .panel-heading span {
+         margin-left: 8px;
+         font-size: 15px;  
+         letter-spacing: 1.19px;
+         color: #47617c;          
+         font-weight: 100;
+         }
+         .panel.panel-primary.secondary {
+         border: 2px solid #eff1f5;
+         box-shadow: unset;
+         }
+         h4.panel-subtitle {
+         font-size: 15px;
+         font-weight: bold;
+         color: #47617c;
+         margin: unset;
+         }
+         .tertiary {
+         color: #4d5f79 !important;
+         background-color: unset !important;
+         border-color: #eff1f5 !important;
+         }
+         .panel-info {
+         border-color: #eff1f5;
+         }
+         .tabbed-body {
+         padding-top: 4px;
+         padding-left: 60px;
+         padding-right: 16px;
+         }
+         h5, .h5 {
+         font-size: 14px;
+         font-weight: 700;
+         margin: unset;
+         color: #47617c;
+         }
+         .inner-card {
+         padding-top: 2px;
+         padding-bottom: 2px;
+         }
+         .inner-card>.panel-group {
+         margin-bottom: unset;
+         }
+         .owner-container {
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         }
+         .owner-label {
+         margin-left: 4px;
+         display: flex;
+         flex-direction: row;
+         }
+         .jobs {
+         display: flex;
+         flex-direction: column;
+         padding-top: 8px;
+         padding-bottom: 8px;
+         }
+         .activities {
+         border: 1px solid #eff1f5;
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         display: flex;
+         flex-direction: row;
+         }
+         .job {
+         border: 1px solid #eff1f5;
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         }
+         .circle {
+         border-radius: 50%;
+         width: 20px;
+         height: 20px;
+         border: 1px solid #47617c;
+         margin-right: 4px;
+         }
+         .people-in-jobs {
+         display: flex;
+         flex-direction: row;
+         align-content: space-between;
+         }
+         a:hover {
+         text-decoration: none;
+         }
+         div.minimalistBlack {
+         border: 0px solid #000000;
+         width: 100%;
+         text-align: left;
+         border-collapse: collapse;
+         }
+         .divtable.minimalistBlack .divtableCell, .divtable.minimalistBlack .divtableHead {
+         border: 1px solid #eff1f5;
+         padding: 5px 4px;
+         }
+         .divtable.minimalistBlack .divtableBody .divtableCell {
+         text-align: center;
+         font-size: 12px;
+         }
+         .divtable.minimalistBlack .divtableHeading {
+         background: #CFCFCF;
+         }
+         .divtable.minimalistBlack .divtableHeading .divtableHead {
+         font-weight: bold;
+         text-align: center;
+         }
+         .minimalistBlack .tableFootStyle {
+         font-size: 14px;
+         }
+         .divtable{ display: table; }
+         .divtableRow { display: table-row; }
+         .divtableHeading { display: table-header-group;}
+         .divtableCell, .divtableHead { display: table-cell;}
+         .divtableHeading { display: table-header-group;}
+         .divtableFoot { display: table-footer-group;}
+         .divtableBody { display: table-row-group;}
+         
+ #dots li{
+  list-style-type: none;
+}
+        
+.more {
+  cursor: pointer;
+  font-size: 25px;
+  border: none;
+  background: transparent;
+}
+
+.more span {
+  display: block;
+  width: .25rem;
+  height: .25rem;
+  background: #363636;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.more span:not(:last-child) {
+  margin-bottom: .125rem;
+}
+
+.dropout {
+  display: flex;
+  flex-direction: row;
+  z-index: 9001;
+  width: fit-content;
+  position: relative;
+  margin-right: auto;
+}
+
+.dropout ul {
+  position: absolute;
+  top: 0.05rem;
+  right: -3rem;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.12s ease;
+}
+
+.dropout.active ul {
+  transform: scaleX(1);
+}
+         
+         
+         
+      </style>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script type="text/javascript">$(document).on('click', '.panel-heading span.clickable', 
+         function(e){
+         
+          		var $this = $(this);
+          		if(!$this.hasClass('panel-collapsed')) {
+          			
+          		   $this.addClass('panel-collapsed');
+                 $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+          		} 
+          		else {
+          		
+          			$this.removeClass('panel-collapsed');
+          			$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+          		}
+          	})
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                  <script>
+
+                function showthreedots() {
+                    document.getElementById("mythreedots").classList.toggle("showdots");
+                }
+
+                // Close the threedots if the user clicks outside of it
+                window.onclick = function(event) {
+                    if (!event.target.matches('.dotsbtn')) {
+                        var threedotss = document.getElementsByClassName("threedots-content");
+                        var i;
+                        for (i = 0; i < threedotss.length; i++) {
+                            var openthreedots = threedotss[i];
+                            if (openthreedots.classList.contains('showdots')) {
+                                openthreedots.classList.remove('showdots');
+                            }
+                        }
+                    }
+                }
+            </script>
+            
+            
+                <script type="text/javascript">
+        document.querySelector('table').onclick = ({
+  target
+}) => {
+  if (!target.classList.contains('more')) return
+  document.querySelectorAll('.dropout.active').forEach(
+    (d) => d !== target.parentElement && d.classList.remove('active')
+  )
+  target.parentElement.classList.toggle('active')
+}
+    </script>
+   </head>
+   <body>
+   
+         {{#each departments}}
+         <!--Each Department-->
+         <div class="row" style="max-width: 1000px;">
+            <div class="col-sm-12">
+               <div class="panel panel-primary">
+                  <!--Department Heading-->
+
+                  <div class="panel-heading">
+                     <!--Department Name-->
+
+                                         <!-- three dots -->
+
+
+                    
+                     <h3 class="panel-title">
+
+
+                     
+                     
+                     <a href="/app/site/hosting/scriptlet.nl?script=1332&deploy=1&departmentid={{id}}" target="_blank">
+                        <img border="0" src="/images/dashboard/view-show.svg" width="20" height="20">
+                        </a>{{identifier}}: {{deptname}} <span>(Department)</span>
+                     </h3>
+                     <!--Department Owner-->
+                     <div class="owner-container">
+                        Owner: 
+                        <div class="owner-label">
+                           <div class="circle">
+                           <a href="https://servicerocket.workplace.com/profile.php?id={{workplaceid}}" target="_blank">
+                           <img class="circle" border="0" src="{{ownerimage}}" width="20" height="20">
+                           </a>
+                           </div>
+                           {{owner}} 
+                        </div>
+                        <!--Chevron--><span class="pull-right clickable" data-toggle="collapse" href="#{{deptid}}body"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                     </div>
+                     <!--Department Owner-->
+                  </div>
+                  <!--Department Heading-->
+                  <!--Department Body-->
+                  <div id="{{deptid}}body" class="panel-collapse collapse">
+                     {{#childs}}
+                     
+                     <div class="panel-body">
+                        <div class="panel-group">
+                           <div class="panel panel-primary secondary">
+                              <!--Sub-Department Header-->
+
+                              <div class="panel-heading">
+
+
+
+                                 <!--Sub-Department Name-->
+                                 <h4 class="panel-title">
+                                 
+
+                                 
+                                 <a href="/app/site/hosting/scriptlet.nl?script=1332&deploy=1&departmentid={{id}}" target="_blank">
+                                 
+
+                                 
+                                 
+                                    <img border="0" src="/images/dashboard/view-show.svg" width="20" height="20">
+                                    </a>{{identifier}}: {{deptname}} <span>(Sub-Department)</span>
+                                 </h4>
+
+        <div class="dropout">
+        <div class="panel-title more">&#10247;</div>
+        <ul id = "dots">
+          <li>
+            View
+          </li>
+          <li>
+            Edit
+          </li>
+          <li>
+            Add
+          </li>
+        </ul>
+      </div>
+
+                                 
+                                 <!--Sub-Department Owner-->
+                                 
+                                 <div class="owner-container">
+                                    Owner: 
+                                    <div class="owner-label">
+                                                                  <div class="circle">
+                           <a href="https://servicerocket.workplace.com/profile.php?id={{workplaceid}}" target="_blank">
+                           <img class="circle" border="0" src="{{ownerimage}}" width="20" height="20">
+                           </a>
+                           </div>
+                                       {{owner}}
+                                    </div>
+                                 </div>
+                                 <!--Sub-Department Owner-->
+                              </div>
+                              <!--Sub-Department Header-->
+                              {{#each functions}}
+                              <!-- Each Functions -->
+                              <!-- Functions -->
+                              <div class="panel-body inner-card">
+                                 <div class="panel-group">
+                                    <div class="panel panel-info">
+                                       <div class="panel-heading tertiary">
+                                          <h5>
+                                             <a href="/app/common/custom/custrecordentry.nl?rectype=1198&id={{id}}&e=T" target="_blank">
+                                             <img border="0" src="/images/dashboard/edit.svg" width="20" height="20">
+                                             </a>{{identifier}}: {{name}} <span>(Function)</span>
+                                          </h5>
+                                          <div class="owner-container">
+                                             Owner: 
+                                             <div class="owner-label">
+                                                <div class="circle">
+						                           <a href="https://servicerocket.workplace.com/profile.php?id={{workplaceid}}" target="_blank">
+						                           <img class="circle" border="0" src="{{ownerimage}}" width="20" height="20">
+						                           </a>
+						                        </div>
+                                                {{owner}}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="panel-body tabbed-body">{{objective}}</div>
+                                       <!-- Activities -->									   
+                                       <div class="jobs tabbed-body">
+                                          <h5>Activities</h5>
+                                          {{#each activities}}
+                                          <div class="activities">
+                                             <a href="/app/common/custom/custrecordentry.nl?rectype=1199&id={{id}}&e=T" target="_blank">
+                                             <img border="0" src="/images/dashboard/edit.svg" width="20" height="20">
+                                             </a><span>{{identifier}}: {{description}} {{level}}</span>
+                                          </div>
+                                          {{else}}
+                                          <div class="activities">
+                                             <span>No Available Activities.</span>
+                                          </div>
+                                          {{/each}}
+                                       </div>
+                                       <!-- Activities -->			
+                                       <!-- Master Cycle Steps -->									   
+                                       <div class="jobs tabbed-body">
+                                          <h5>Master Cycle Steps</h5>
+                                          {{#each mastercyclestep}}
+                                          <div class="job">
+                                             <div class="divtable minimalistBlack">
+                                                <div class="divtableHeading">
+                                                   <div class="divtableRow">
+                                                      <div class="divtableHead">Cycle</div>
+                                                      <div class="divtableHead">Step</div>
+                                                      <div class="divtableHead">Accountable</div>
+                                                      <div class="divtableHead">Visible</div>
+                                                      <div class="divtableHead">Approval</div>
+                                                   </div>
+                                                </div>
+                                                <div class="divtableBody">
+                                                   <div class="divtableRow">
+                                                      <div class="divtableCell"><a href="/app/common/custom/custrecordentry.nl?rectype=1203&id={{masterid}}" target="_blank">
+                                                         <img border="0" src="/images/dashboard/view-show.svg" width="20" height="20">
+                                                         </a>{{master}}
+                                                      </div>
+                                                      <div class="divtableCell">{{name}}</div>
+                                                      <div class="divtableCell"><input type="checkbox" name="{{name}}accountable" value="{{accountable}}" {{accountable}} onclick="this.checked=!this.checked;"></div>
+                                                      <div class="divtableCell"><input type="checkbox" name="{{name}}visible" value="{{visible}}" {{visible}} onclick="this.checked=!this.checked;" ></div>
+                                                      <div class="divtableCell"><input type="checkbox" name="{{name}}approver" value="{{approver}}" {{approver}} onclick="this.checked=!this.checked;"></div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          {{else}}
+                                          <div class="job">
+                                             <span>No Available Steps.</span>
+                                          </div>
+                                          {{/each}}
+                                       </div>
+                                       <!-- Master Cycle Steps -->	
+                                       <!-- Jobs -->									   
+                                       <div class="jobs tabbed-body">
+                                          <h5>Job Profiles</h5>
+                                          {{#each jobs}}
+                                          <div class="job">
+                                             <div><a href="/app/site/hosting/scriptlet.nl?script=1320&deploy=1&jobid={{hcmjob}}" target="_blank">
+                                                <img border="0" src="/images/dashboard/view-show.svg" width="20" height="20">
+                                                </a>{{name}}
+                                             </div>
+                                             <div class="people-in-jobs">
+                                             </div>
+                                          </div>
+										{{else}}
+										 <div class="job">
+                                             <span>No Available Profiles.</span>
+                                          </div>
+                                          {{/each}}
+                                       </div>
+                                       <!-- Jobs -->	
+                                    </div>
+                                 </div>
+                              </div>
+                              {{/each}}
+                              <!-- Functions -->
+                           </div>
+                        </div>
+                     </div>
+                     {{else}}
+						<div class="panel-body">
+                        <div class="panel-group">
+                              {{#each functions}}
+                              <!-- Each Functions -->
+                              <!-- Functions -->
+                              <div class="panel-body inner-card">
+                                 <div class="panel-group">
+                                    <div class="panel panel-info">
+                                       <div class="panel-heading tertiary">
+                                          <h5>
+                                             <a href="/app/common/custom/custrecordentry.nl?rectype=1198&id={{id}}&e=T" target="_blank">
+                                             <img border="0" src="/images/dashboard/edit.svg" width="20" height="20">
+                                             </a>{{identifier}}: {{name}} <span>(Function)</span>
+                                          </h5>
+                                          <div class="owner-container">
+                                             Owner: 
+                                             <div class="owner-label">
+                                                <div class="circle">
+						                           <a href="https://servicerocket.workplace.com/profile.php?id={{workplaceid}}" target="_blank">
+						                           <img class="circle" border="0" src="{{ownerimage}}" width="20" height="20">
+						                           </a>
+						                        </div>
+
+                                                {{owner}}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="panel-body tabbed-body">{{objective}}</div>
+                                       <!-- Activities -->									   
+                                       <div class="jobs tabbed-body">
+                                          <h5>Activities</h5>
+                                          {{#each activities}}
+                                          <div class="activities">
+                                             <a href="/app/common/custom/custrecordentry.nl?rectype=1199&id={{id}}&e=T" target="_blank">
+                                             <img border="0" src="/images/dashboard/edit.svg" width="20" height="20">
+                                             </a><span>{{identifier}}: {{description}} {{level}}</span>
+                                          </div>
+                                          {{else}}
+                                          <div class="activities">
+                                             <span>No Available Activities.</span>
+                                          </div>
+                                          {{/each}}
+                                       </div>
+                                       <!-- Activities -->			
+                                       <!-- Master Cycle Steps -->									   
+                                       <div class="jobs tabbed-body">
+                                          <h5>Master Cycle Steps</h5>
+                                          {{#each mastercyclestep}}
+                                          <div class="job">
+                                             <div class="divtable minimalistBlack">
+                                                <div class="divtableHeading">
+                                                   <div class="divtableRow">
+                                                      <div class="divtableHead">Cycle</div>
+                                                      <div class="divtableHead">Step</div>
+                                                      <div class="divtableHead">Accountable</div>
+                                                      <div class="divtableHead">Visible</div>
+                                                      <div class="divtableHead">Approval</div>
+                                                   </div>
+                                                </div>
+                                                <div class="divtableBody">
+                                                   <div class="divtableRow">
+                                                      <div class="divtableCell"><a href="/app/common/custom/custrecordentry.nl?rectype=1203&id={{masterid}}" target="_blank">
+                                                         <img border="0" src="/images/dashboard/view-show.svg" width="20" height="20">
+                                                         </a>{{master}}
+                                                      </div>
+                                                      <div class="divtableCell">{{name}}</div>
+                                                      <div class="divtableCell"><input type="checkbox" name="{{name}}accountable" value="{{accountable}}" {{accountable}} onclick="this.checked=!this.checked;"></div>
+                                                      <div class="divtableCell"><input type="checkbox" name="{{name}}visible" value="{{visible}}" {{visible}} onclick="this.checked=!this.checked;" ></div>
+                                                      <div class="divtableCell"><input type="checkbox" name="{{name}}approver" value="{{approver}}" {{approver}} onclick="this.checked=!this.checked;"></div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          {{else}}
+                                          <div class="job">
+                                             <span>No Available Steps.</span>
+                                          </div>
+                                          {{/each}}
+                                       </div>
+                                       <!-- Master Cycle Steps -->	
+                                       <!-- Jobs -->									   
+                                       <div class="jobs tabbed-body">
+                                          <h5>Job Profiles</h5>
+                                          {{#each jobs}}
+                                          <div class="job">
+                                             <div><a href="/app/site/hosting/scriptlet.nl?script=1320&deploy=1&jobid={{hcmjob}}" target="_blank">
+                                                <img border="0" src="/images/dashboard/view-show.svg" width="20" height="20">
+                                                </a>{{name}}
+                                             </div>
+                                             <div class="people-in-jobs">
+                                             </div>
+                                          </div>
+                                          {{else}}
+										 <div class="job">
+                                             <span>No Available Profiles.</span>
+                                          </div>
+                                          {{/each}}
+                                       </div>
+                                       <!-- Jobs -->	
+                                    </div>
+                                 </div>
+                              </div>
+                              {{/each}}
+                              <!-- Functions -->
+                        </div>
+                     </div>
+                     {{/childs}}
+                  </div>
+               </div>
+            </div>
+         </div>
+         {{/each}}
+      </div>
+   </body>
+</html>

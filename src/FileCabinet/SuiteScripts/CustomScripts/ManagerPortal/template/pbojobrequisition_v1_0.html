@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css">
+    
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    
+    $(document).ready(function() {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            $.fn.dataTable.tables({
+                visible: true,
+                api: true
+            }).columns.adjust();
+        });
+
+        var requisitonTableGrouping = 3;
+        $('#table-jobrequisition thead th').css({
+            'background-color': 'gray',
+            'font-weight': 'bold',
+            'color': 'white',
+            'text-transform': 'uppercase'
+        });
+        
+        var table = $('#table-jobrequisition').DataTable({
+            ajax: '/app/site/hosting/scriptlet.nl?script=1480&deploy=1&action=backend',
+            pageLength: 25,
+            scrollY: 650,
+            scrollCollapse: true,
+            paging: true,
+            'columnDefs': [{
+                    'visible': false,
+                    'targets': requisitonTableGrouping
+                },
+                {
+                    'visible': false,
+                    'targets': [10, 14, 15]
+                },
+                {
+                    'className': 'dt-control',
+                    'targets': [0]
+                },
+                {
+                    'className': 'dt-body-right',
+                    'targets': [4, 8, 9]
+                },
+                {
+                    'render': DataTable.render.number(',', '.', 2, '$'),
+                    'targets': [8, 9]
+                },
+                {
+                    'render': function(data, type, row) {
+                    	return '<a target="_blank" href="/app/hcm/hris/jobrequisition.nl?id='+ data+ '">' + data + '</a>';
+                    },
+                    'targets': 1
+                },
+                {
+                    'render': function(data, type, row) {
+                    	
+                        return '<a target="_blank" href="https://hire.lever.co/jobs/requisitions/edit/'+ row[17] + '?view=all">' + data + '</a>';
+                    },
+                    'targets': 2
+                },
+
+                {
+                    'render': function(data, type, row) {
+
+                        if (data == 'T') {
+                            return 'Yes';
+                        } else {
+                            return 'No';
+                        }
+                    },
+                    'targets': 7
+                }
+            ],
+            'order': [
+                [14, 'asc']
+            ],
+            'drawCallback': function(settings) {
+                var api = this.api();
+                var rows = api.rows({
+                    page: 'current'
+                }).nodes();
+                var last = null;
+
+                api.column(requisitonTableGrouping, {
+                    page: 'current'
+                }).data().each(function(group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td align="center" colspan="15" style="text-transform: uppercase;"><b>' + group + '</b></td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            }
+        });
+        
+		function stickies(sticky) {
+		   	
+			var arrStickies = JSON.parse(sticky[15]); 
+			var sHtml = '<div class="alert alert-warning" role="alert">'
+					
+				if(arrStickies){
+					
+					for (var int = 0; int < arrStickies.length; int++) {
+					    sHtml += '<p>' + arrStickies[int][3] + '-' + arrStickies[int][4] + '-' + arrStickies[int][1] + ': ' + arrStickies[int][2] + '</p>'
+					}
+				}
+			sHtml += '</div>'
+			return sHtml;
+		}
+        
+        $('#table-jobrequisition').on('click', 'td.dt-control', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+
+            if (row.child.isShown()) {
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                row.child(stickies(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+        
+    });
+    
+    </script>
+    <style type="text/css">
+        * {
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        ol,
+        ul {
+            padding-left: 0rem !important;
+        }
+
+        .text ul,
+        .text ol {
+
+            margin-left: 0px !important;
+        }
+
+        .nav {
+            display: flex !important;
+        }
+
+        .tab-content {
+            padding-left: 20px !important;
+        }
+
+        .table-caption {
+            caption-side: top;
+            width: auto;
+            text-align: center
+        }
+
+        .pagination {
+            display: flex !important;
+            list-style: none !important;
+        }
+
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        div.dataTables_wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .noaccess {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #table-jobrequisition thead th{
+        	text-transform: uppercase!important;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container-md">
+ 
+		<ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab-jobrequisition" data-toggle="tab">Job Requisition</a>
+            </li>
+<!--             <li>
+                <a href="#tab-table2" data-toggle="tab">Table 2</a>
+            </li> -->
+        </ul>
+        <div class="tab-content">
+        
+            <div class="tab-pane active" id="tab-table1">
+            <br/>
+                <table id="table-jobrequisition" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+			            	{{#each header}}
+			               	<th>{{this}}</th>
+			               	{{/each}}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tab-pane" id="tab-table2">
+            </div>
+        </div>
+	</div>
+</body>
+
+</html>

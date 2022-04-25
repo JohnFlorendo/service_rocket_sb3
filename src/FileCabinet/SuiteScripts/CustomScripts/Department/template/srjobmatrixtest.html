@@ -1,0 +1,304 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Career Pathways</title>
+	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+      <style>
+         .careertable {
+         border-spacing: 0;
+         table-layout: fixed;
+         }
+         .careertable thead th {
+         padding: 3px;
+         position: sticky;
+         top: 0;
+         z-index: 1;
+         width: 25vw;
+         background: white;
+         }
+         .careertable td {
+
+         padding: 4px 5px;
+         text-align: left;
+         vertical-align: top!important;
+         }
+         .careertable tbody th {
+         text-align: left;
+         position: relative;
+         }
+         .careertable thead th:first-child {
+         position: sticky;
+         left: 0;
+         z-index: 2;
+         }
+         .careertable tbody th {
+         position: sticky;
+         left: 0;
+         background: white;
+         z-index: 1;
+         }
+         caption {
+         text-align: left;
+         padding: 0.25rem;
+         position: sticky;
+         left: 0;
+         }
+         [role="region"][aria-labelledby][tabindex] {
+         max-width: 95vw;
+         max-height: 80vh;
+         overflow: auto;
+         }
+         [role="region"][aria-labelledby][tabindex]:focus {
+
+         outline: 0;
+         }
+
+         .bg-secondary{
+        	 background: #607799 !important;
+         }
+         
+         .btn-toggle{
+        	 color: #fff !important;
+         }
+         
+      </style>
+   </head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+	<input type="hidden" id="myjob" name="myjob" value={{myjob}}>
+<div class="p-2">
+   <span class="h2">You Selected: </span >
+   <span class="h2" id ="myheader">
+      {{myjobname}}({{myjob}}) .
+
+   </span >
+</div>
+	<div class="p-2">
+		
+		
+	<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#commentmodal" data-toggle="tooltip" data-placement="top" title="Add Comment/Note">
+      Comment/Note
+      </button>
+		
+		<div class="modal fade" id="commentmodal" tabindex="-1" aria-labelledby="commentmodallabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered modal-lg" >
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="commentmodallabel">Comment/Note</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <form>
+		          <div class="mb-3">
+		            <textarea class="form-control" id="message-text" rows="10" required></textarea>
+		          </div>
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button id="savecomment" type="button" class="btn btn-primary">Save</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div role="region" aria-labelledby="caption" tabindex="0">
+		<table class="careertable">
+		{{#each list}}
+			{{#if @first}}
+	        <thead>
+				<tr>
+				{{#each this}}
+					{{#if @first}}
+					<th class= "bg-light"  style="width: 15rem;">
+					</th>
+		            {{else}}
+                  	<th class= "bg-light"  style="width: 15rem;">
+                    	<div class="m-2 card" style="width: 12rem;">
+                        	<div class="p-2 text-white bg-secondary card-header">
+                           		<strong>{{this}}</strong>	
+                        	</div>
+                     	</div>
+                  	</th>
+					{{/if}}
+				{{/each}}
+			    </tr>
+			</thead>
+	        {{else}}
+	        <tbody>
+				<tr>
+				{{#each this}}
+					{{#if @first}}
+				    <th class="align-top bg-light">
+	      				<div class="m-2 card" style="width: 12rem;">	
+           					<div class="p-2 text-white bg-secondary card-header">
+                           		<div class="container">
+								  <div class="row">
+								    <div class="p-1 col-md-auto">
+								    
+								    <button type="button" class="btn btn-toggle btn-sm" data-rowcolappser = {{@../index}} data-show="on"><i class="bi bi-dash-square" ></i></button>
+								    
+								    </div>
+								    <div class="p-1 col">
+								    <strong>{{this}}</strong>
+								     
+								    </div>
+								  </div>
+								</div>
+           					</div>
+		 				<div>
+				    </th>
+					{{else}}
+	                <td>
+	                	{{#each this}}
+	                	<div class="collapse show multi-collapse" data-rowidx = {{@../../index}}>
+						<div class="m-2 card" style="width: 12rem;" >
+							<div class="p-2 card-header {{careertrack}}">
+								{{#if this.opening}}
+									<span class="m-1">
+										<img height="16" width="16" alt="🚀" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/td9/1.5/32/1f680.png">
+								{{/if}} <a class="card-link" href="/app/site/hosting/scriptlet.nl?script=1320&deploy=1&jobid={{this.id}}" target="_blank">{{this.name}} ({{this.id}})</a>
+									</span>
+									</div>
+							<div class="p-2 card-body">
+								<span class="m-1">
+									{{#if this.responsibility}}
+										<img height="16" width="16" alt="✅" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc0/1.5/32/2705.png">
+									{{else}}
+										<img height="16" width="16" alt="❎" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t6c/1.5/32/274e.png">
+									{{/if}}
+									Responsibilities
+								</span><br/>
+								<span class="m-1">
+									{{#if this.qualification}}
+										<img height="16" width="16" alt="✅" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc0/1.5/32/2705.png">
+									{{else}}
+										<img height="16" width="16" alt="❎" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t6c/1.5/32/274e.png">
+									{{/if}}
+									Qualification
+								</span><br/>
+								<span class="m-1">
+									{{#if this.skill}}
+										<img height="16" width="16" alt="✅" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc0/1.5/32/2705.png">
+									{{else}}
+										<img height="16" width="16" alt="❎" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t6c/1.5/32/274e.png">
+									{{/if}}
+									Skills
+								</span>	<br>
+
+
+							</div>
+							<div class="p-2 card-footer text-muted text-center {{careertrack}}">
+							
+							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+							   <input type="checkbox" class="btn-check" name="btnradio{{this.id}}" id="btnradio{{this.id}}1" autocomplete="off" {{careerme}} data-jobname="{{this.name}} ({{this.id}})" data-jobid="{{this.id}}" data-oldvalue = "{{careerme}}" data-once=true data-field = "thisisme">
+							   <label class="btn btn-outline-primary" style="z-index: 0;" for="btnradio{{this.id}}1" data-toggle="tooltip" data-placement="top" title="This is Me">
+							      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+							         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+							      </svg>
+							   </label>
+							   <input type="checkbox" class="btn-check" name="btnradio{{this.id}}" id="btnradio{{this.id}}2" autocomplete="off" {{working}} data-jobname="{{this.name}} ({{this.id}})" data-jobid="{{this.id}}" data-oldvalue = "{{working}}" data-once=false data-field = "workingtobe">
+							   <label class="btn btn-outline-primary" style="z-index: 0;" for="btnradio{{this.id}}2" data-toggle="tooltip" data-placement="top" title="Working to become one">
+							      
+							      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-compass" viewBox="0 0 16 16">
+									  <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+									  <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
+									</svg>
+							      
+							   </label>
+							   <input type="checkbox" class="btn-check" name="btnradio{{this.id}}" id="btnradio{{this.id}}3" autocomplete="off" {{interested}} data-jobname="{{this.name}} ({{this.id}})"  data-jobid="{{this.id}}" data-oldvalue = "{{interested}}" data-once=false data-field = "iamiterested">
+							   <label class="btn btn-outline-primary" style="z-index: 0;" for="btnradio{{this.id}}3" data-toggle="tooltip" data-placement="top" title="I am interested">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+								  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+								</svg>
+							      
+							   </label>
+
+							</div>
+							</div>
+						</div>
+						</div>
+	                	{{/each}}
+	                </td>
+				    {{/if}}
+				{{/each}}
+	            </tr>
+			</tbody>
+	        {{/if}}
+		{{/each}}
+		</table>
+	</div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      	<script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip(); 
+			
+			$('#savecomment' ).click(function() {
+				console.log($("#message-text" ).val());
+				
+				$.post('/app/site/hosting/scriptlet.nl?script=1430&deploy=1',
+						{
+							action: 'comment',
+							career: {{mycareer}},
+							title: encodeURIComponent('Job ' + $("#myheader" ).text() + ' notes.'),
+							message: encodeURIComponent($("#message-text" ).val())
+					    },
+					    function(data, status){
+					      console.log("Data: " + data + "\nStatus: " + status);
+					      console.log($( "#message-text" ).val(''));
+						});
+				
+			});
+			
+			$('[data-rowcolappser]').click(function() {
+				
+				console.log($(this).data('show'));
+				
+				if($(this).data('show') == 'on'){
+					$("[data-rowidx=" + $(this).data('rowcolappser') + "]").collapse('hide');
+					$(this).data('show', 'off');
+					$(this).toggleClass('bi bi-plus-square');
+				}
+				else if($(this).data('show') == 'off'){
+					$("[data-rowidx=" + $(this).data('rowcolappser') + "]").collapse('show');
+					$(this).data('show', 'on');
+					$(this).toggleClass('bi bi-dash-square');
+				}
+				
+				console.log($(this).data('show'));
+			});
+			
+		
+			$('input:checkbox').change(function() {
+			
+				$('input:checkbox[data-jobid='+$(this).data('jobid')+ '][data-field!='+ $(this).data('field') + ']').prop('checked', false);
+			
+				if($(this).data('once') == true){
+					$('input:checkbox[data-jobid!='+$(this).data('jobid')+ '][data-field='+ $(this).data('field') + ']').prop('checked', false);
+				}
+		
+				if($(this).prop('checked') && $(this).data('field') == 'thisisme'){
+					$("#myjob" ).val($(this).data('jobid'));
+					$("#myheader").text($(this).data('jobname'))
+				}
+				
+				$.post('/app/site/hosting/scriptlet.nl?script=1430&deploy=1',
+					{
+						action: 'updatecareer',
+						career: {{mycareer}},
+						job: $(this).data('jobid'),
+						thisisme: $('input:checkbox[data-jobid='+$(this).data('jobid')+ '][data-field=thisisme]').prop('checked'),
+						workingtobe: $('input:checkbox[data-jobid='+$(this).data('jobid')+ '][data-field=workingtobe]').prop('checked'),
+						iamiterested: $('input:checkbox[data-jobid='+$(this).data('jobid')+ '][data-field=iamiterested]').prop('checked'),
+				    },
+				    function(data,status){
+				      console.log("Data: " + data + "\nStatus: " + status);
+				});
+			});
+		});
+		
+		</script>
+   </body>
+</html>

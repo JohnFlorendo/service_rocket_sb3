@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/core/media/media.nl?id=237336&c=3688201&h=weGSRGNI2b_dt4DTIy4v_8BHAxVjdnUlAeD5k_rpv70RnRLJ&_xt=.css">
+    <link rel="stylesheet" type="text/css" href="/core/media/media.nl?id=237236&c=3688201&h=qMSYc8XHCBpwg90rZ8RhsDp3bXdsiA4mOlbxXzS256H_bCzw&_xt=.css">
+        
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowgroup/1.1.4/js/dataTables.rowGroup.min.js"></script>
+    
+    
+
+    <script type="text/javascript">
+    
+    $(document).ready(function() {
+    	
+    	{{#if individual}}
+    	
+	        $.get('/app/site/hosting/scriptlet.nl?script=1482&deploy=1&action=backend&list=all&type={{type}}', function (data) {
+	        	
+	            $('#table-rocketeer').DataTable({
+	               data: data.data,
+	               columns: data.header,
+	               pageLength: 25,
+		           columnDefs: [{
+		                'visible': false,
+		                'targets': [0,1]
+		           }],
+		           order: [[0, 'asc'], [1, 'asc'], [2, 'asc']],
+		           rowGroup: {
+		                dataSrc: [0, 1]
+		           }
+	            });
+	
+	         }, 'json');
+         
+    	{{else}}
+	        
+	        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+	            $.fn.dataTable.tables({
+	                visible: true,
+	                api: true
+	            }).columns.adjust();
+	        });
+	        
+	        $.get('/app/site/hosting/scriptlet.nl?script=1482&deploy=1&action=backend&list=workingtobe&type={{type}}', function (data) {
+      	
+	            $('#table-workingtobe').DataTable({
+	               data: data.data,
+	               columns: data.header,
+	               scrollY: 650,
+		            scrollCollapse: true,
+		            paging: true,
+		            ordering: false,
+		            columnDefs: [{
+		                'visible': false,
+		                'targets': [2,3]
+		            }],
+		            order: [[2, 'asc'], [3, 'asc'], [0, 'asc']],
+		            rowGroup: {
+		                dataSrc: [2, 3]
+		            }
+	            });
+	         }, 'json');
+	        
+	        $.get('/app/site/hosting/scriptlet.nl?script=1482&deploy=1&action=backend&list=interested&type={{type}}', function (data) {
+        	
+	            $('#table-interested').DataTable({
+	               data: data.data,
+	               columns: data.header,
+	               scrollY: 650,
+		            scrollCollapse: true,
+		            paging: true,
+		            ordering: false,
+		            columnDefs: [{
+		                'visible': false,
+		                'targets': [2,3]
+		            }],
+		            order: [[2, 'asc'], [3, 'asc'], [0, 'asc']],
+		            rowGroup: {
+		                dataSrc: [2, 3]
+		            }
+	            });
+	         }, 'json');
+	        
+
+	        
+    	{{/if}}
+    	
+    		$(".dataTables_scrollHeadInner", "table").css({
+	            'background-color': 'gray',
+	            'font-weight': 'bold',
+	            'color': 'white',
+	            'text-transform': 'uppercase'
+	        })
+    });
+    
+    </script>
+    <style type="text/css">
+        * {
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        ol,
+        ul {
+            padding-left: 0rem !important;
+        }
+
+        .text ul,
+        .text ol {
+
+            margin-left: 0px !important;
+        }
+
+        .nav {
+            display: flex !important;
+        }
+
+        .tab-content {
+            padding-left: 20px !important;
+        }
+
+        .table-caption {
+            caption-side: top;
+            width: auto;
+            text-align: center
+        }
+
+        .pagination {
+            display: flex !important;
+            list-style: none !important;
+        }
+
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        div.dataTables_wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        tr.odd td:first-child,
+		tr.even td:first-child {
+		    padding-left: 4em;
+		}
+		
+        .noaccess {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-md">
+
+		{{#if individual}}
+		        
+			<div class="container-md">
+	           <table id="table-rocketeer" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	           </table>
+	       	</div>
+       	
+       	{{else}}
+       	
+			<ul class="nav nav-tabs" role="tablist">
+	            <li class="active">
+	                <a href="#tab-workingtobe" data-toggle="tab">Working To Be One</a>
+	            </li>
+	            <li>
+	                <a href="#tab-interested" data-toggle="tab">Interested</a>
+	            </li>
+	        </ul>
+	        <div class="tab-content">
+	            <div class="tab-pane active" id="tab-workingtobe">
+	            	<br/>
+	                <table id="table-workingtobe" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	                	<thead>
+	                	</thead>
+	                </table>
+	            </div>
+	            <div class="tab-pane" id="tab-interested">
+	            	<br/>
+	                <table id="table-interested" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	                </table>
+	            </div>
+	        </div>
+        {{/if}}
+        
+	</div>
+</body>
+
+</html>

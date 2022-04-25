@@ -1,0 +1,71 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Departments</title>
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet"></link>
+      <style>.row{
+         margin-top:40px;
+         padding: 0 10px;
+         }
+         .clickable{
+         cursor: pointer;   
+         }
+         .panel-heading span {
+         margin-top: -20px;
+         font-size: 15px;
+         }
+      </style>
+      <script type="text/javascript">$(document).on('click', '.panel-heading span.clickable', function(e){
+         var $this = $(this);
+         if(!$this.hasClass('panel-collapsed')) {
+         
+         $this.addClass('panel-collapsed');
+         
+         $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+         } 
+         else {
+         
+         $this.removeClass('panel-collapsed');
+         $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+         }
+         })
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <div class="container">
+         <!------ row ---------->
+         <!------ {{#each deptGroup in fourDepartment departments}} ---------->
+         
+         {{#grouped_each 4 departments}}
+         
+         <div class="row">
+         
+            {{#each this}}
+            <div class="col-sm-3">
+               <div class = "panel panel-primary">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">
+                        {{identifier}} {{deptname}}
+                     </h3>
+                     <span class="pull-right clickable" data-toggle="collapse" href="#{{deptid}}body"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                  </div>
+                  <div id = "{{deptid}}body" class = "panel-collapse collapse">
+                     {{#childs}}
+                     <div class = "panel-body">{{identifier}} {{deptname}}</div>
+                     {{/childs}}
+                  </div>
+               </div>
+            </div>
+            {{/each}}
+         </div>
+         {{/grouped_each}}
+         <!------ row ---------->
+      </div>
+   </body>
+</html>

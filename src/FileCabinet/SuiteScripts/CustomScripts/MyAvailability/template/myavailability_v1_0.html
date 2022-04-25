@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>MyAvailability</title>
+   		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      		integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+   		<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+   
+   		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      	crossorigin="anonymous"></script>
+     
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+		
+		<!-- js jQuery -->
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   		
+	<style type="text/css">
+		
+		      ol,
+		      ul {
+		         padding-left: 0rem !important;
+		      }			
+		
+			.highcharts-figure,
+			.highcharts-data-table table {
+				width: 70%;
+				margin: 1em auto;
+			}
+
+			.highcharts-data-table table {
+				font-family: Verdana, sans-serif;
+				border-collapse: collapse;
+				border: 1px solid #EBEBEB;
+				margin: 10px auto;
+				width: 80%;
+			}
+
+			.highcharts-data-table caption {
+				padding: 1em 0;
+				font-size: 1.2em;
+				color: #555;
+			}
+
+			.highcharts-data-table th {
+				font-weight: 600;
+				padding: 0.5em;
+			}
+
+			.highcharts-data-table td,
+			.highcharts-data-table th,
+			.highcharts-data-table caption {
+				padding: 0.5em;
+			}
+
+			.highcharts-data-table thead tr,
+			.highcharts-data-table tr:nth-child(even) {
+				background: #f8f8f8;
+			}
+
+			.highcharts-data-table tr:hover {
+				background: #f1f7ff;
+			}
+
+			.highcharts-credits {
+				font-size: 0px !important;
+			}
+      .table-caption {
+         caption-side: top;
+         width: auto;
+         text-align: center
+      }
+
+      .pagination {
+         display: flex !important;
+         list-style: none !important;
+      }
+			.noaccess {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	
+    <script type="text/javascript">
+    
+	    $(document).ready(function() {
+	    	
+			var hcChart = Highcharts.chart('container', {
+			    chart: {
+			        type: 'column'
+			    },
+			    title: {
+			        text: 'Availability by Week'
+			    },
+			    xAxis: {
+			        categories: [
+			        ]
+			    },
+			    yAxis: [{
+			        min: 0,
+			        title: {
+			            text: 'Hours'
+			        }
+			    
+			    }],
+			    legend: {
+			        shadow: false
+			    },
+			    tooltip: {
+			        shared: true
+			    },
+			    plotOptions: {
+			        column: {
+			            grouping: false,
+			            shadow: false,
+			            borderWidth: 0
+			        }
+			    },
+			    series: []
+			});
+			
+			Highcharts.getJSON('/app/site/hosting/scriptlet.nl?script=1485&deploy=1&action=backend', function(data) {
+				hcChart.xAxis[0].setCategories(data.xcategories)
+				hcChart.addSeries(data.series[0]);
+				hcChart.addSeries(data.series[1]);
+				hcChart.addSeries(data.series[2]);
+				hcChart.addSeries(data.series[3]);
+			})
+        
+    	});
+    
+    </script>
+	
+	
+	</head>
+	<body>
+		<figure class="highcharts-figure">
+			<div id="container"></div>
+		</figure>
+	</body>
+</html>

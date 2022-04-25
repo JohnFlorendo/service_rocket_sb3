@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
+   <script src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
+   <script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
+   
+   
+   
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/highcharts-more.js"></script>
+   <script src="https://code.highcharts.com/modules/xrange.js"></script>
+   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+   <style type="text/css">
+      * {
+         font-size: 14px;
+         box-sizing: border-box;
+      }
+      ol,
+      ul {
+         padding-left: 0rem !important;
+      }
+      
+      .nav {
+         display: flex !important;
+      }
+
+      .tab-content {
+         padding-left: 20px !important;
+      }
+
+      .table-caption {
+         caption-side: top;
+         width: auto;
+         text-align: center
+      }
+
+      .pagination {
+         display: flex !important;
+         list-style: none !important;
+      }
+      .highcharts-figure,
+      .highcharts-data-table table {
+         width: 70%;
+         margin: 1em auto;
+      }
+
+      .highcharts-data-table table {
+         font-family: Verdana, sans-serif;
+         border-collapse: collapse;
+         border: 1px solid #EBEBEB;
+         margin: 10px auto;
+         width: 80%;
+      }
+
+      .highcharts-data-table caption {
+         padding: 1em 0;
+         font-size: 1.2em;
+         color: #555;
+      }
+
+      .highcharts-data-table th {
+         font-weight: 600;
+         padding: 0.5em;
+      }
+
+      .highcharts-data-table td,
+      .highcharts-data-table th,
+      .highcharts-data-table caption {
+         padding: 0.5em;
+      }
+
+      .highcharts-data-table thead tr,
+      .highcharts-data-table tr:nth-child(even) {
+         background: #f8f8f8;
+      }
+
+      .highcharts-data-table tr:hover {
+         background: #f1f7ff;
+      }
+
+      .highcharts-credits {
+         font-size: 0px !important;
+      }
+
+      .noaccess {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+      }
+         .notice {
+         padding: 15px;
+         background-color: #fafafa;
+         border-left: 6px solid #7f7f84;
+         margin-bottom: 10px;
+         -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+         -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+         box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+         }
+         .notice-red {
+         padding: 10px;
+         font-size: 100%;
+         border-color: #FF0000;
+         }
+         .notice-red {
+         border-color: #FF0000;
+         }
+         .notice-red>strong {
+         font-size: 150%;
+         color: #FF0000;
+         } 
+         .notice-amber {
+         padding: 10px;
+         font-size: 100%;
+         border-color: #FFBF00;
+         }
+         .notice-amber {
+         border-color: #FFBF00;
+         }
+         .notice-amber>strong {
+         font-size: 150%;
+         color: #FFBF00;
+         }
+         .notice-green {
+         padding: 10px;
+         font-size: 100%;
+         border-color: #00B300;
+         }
+         .notice-green {
+         border-color: #00B300;
+         }
+         .notice-green>strong {
+         font-size: 150%;
+         color: #00B300;
+         }
+      .amount-label {}
+   </style>
+   <script>
+      $(document).ready(function () {
+    	  
+         var table = $('#table-task').DataTable({
+        	paging: false,
+        	searching: false,
+            initComplete: function (settings, json) {
+               this.api().columns('.sum').every(function () {
+                  var column = this;
+
+                  var sum = column
+                     .data()
+                     .reduce(function (a, b) {
+                   	 	console.log(a);
+                   	 	console.log(b);
+                        a = parseInt(a.toString().replace(/[^\d\.]/g, ''), 10);
+                        if (isNaN(a)) { a = 0; }
+                        b = parseInt(b.toString().replace(/[^\d\.]/g, ''), 10);
+                        if (isNaN(b)) { b = 0; }
+                        return a + b;
+                     });
+
+                  $(column.footer()).html(sum.toFixed(2));
+               });
+            }
+         });
+         
+         
+         
+      });
+   </script>
+</head>
+
+<body>
+   <div class="container-md">
+      <div class="row mb-3">
+         <div class="d-flex">
+            <div class="flex-grow-1 ms-3">
+               <div class="container">
+
+                  <div class="row mb-1">
+                  
+                     <div class="col-sm p1">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Customer
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                  
+                           <span class="inputreadonly">
+                              <a target="_blank" href="https://app.hubspot.com/contacts/296336/company/{{customerhsid}}/"><svg width="24"
+                                    height="24" viewBox="6.20856283 .64498824 244.26943717 251.24701176"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                       d="m191.385 85.694v-29.506a22.722 22.722 0 0 0 13.101-20.48v-.677c0-12.549-10.173-22.722-22.721-22.722h-.678c-12.549 0-22.722 10.173-22.722 22.722v.677a22.722 22.722 0 0 0 13.101 20.48v29.506a64.342 64.342 0 0 0 -30.594 13.47l-80.922-63.03c.577-2.083.878-4.225.912-6.375a25.6 25.6 0 1 0 -25.633 25.55 25.323 25.323 0 0 0 12.607-3.43l79.685 62.007c-14.65 22.131-14.258 50.974.987 72.7l-24.236 24.243c-1.96-.626-4-.959-6.057-.987-11.607.01-21.01 9.423-21.007 21.03.003 11.606 9.412 21.014 21.018 21.017 11.607.003 21.02-9.4 21.03-21.007a20.747 20.747 0 0 0 -.988-6.056l23.976-23.985c21.423 16.492 50.846 17.913 73.759 3.562 22.912-14.352 34.475-41.446 28.985-67.918-5.49-26.473-26.873-46.734-53.603-50.792m-9.938 97.044a33.17 33.17 0 1 1 0-66.316c17.85.625 32 15.272 32.01 33.134.008 17.86-14.127 32.522-31.977 33.165"
+                                       fill="#ff7a59" />
+                                 </svg></a>
+                              <a style="font-size: 24px!important;" target="_blank"
+                                 href="https://app.hubspot.com/contacts/296336/company/{{customerhsid}}/">{{customer}}</a>
+                  
+                           </span>
+                           <span class="smallgraytextnolink uir-label ">
+                              <span class="smallgraytextnolink">
+                                 Project
+                              </span>
+                           </span>
+                           <span class="uir-field inputreadonly">
+                              <span class="inputreadonly">
+                     
+                                 <a target="_blank" href="{{wpchatgroup}}"><svg viewBox="0 0 32 32"
+                                       class="a8c37x1j ms05siws hwsy1cff b7h9ocf4 aaxa7vy3" height="24" width="24">
+                                       <path
+                                          d="M16.57,2.29A13.88,13.88,0,0,0,11,3.42a14.28,14.28,0,0,0,0,26.31,14.06,14.06,0,0,0,5.56,1.13,14.3,14.3,0,0,0,5.25-1l-1.08-2.73a11.1,11.1,0,0,1-4.17.8,11.36,11.36,0,0,1,0-22.71,9.6,9.6,0,0,1,8,14.91L22.1,14c-.37-.9-.81-2.25-2.47-2.25s-2.1,1.36-2.46,2.25l-2.29,5.68-3.09-7.78H8.55l3.84,9.46c.39,1,.82,2.26,2.49,2.26s2.08-1.3,2.47-2.26l2.28-5.62,2.29,5.62c.46,1.16.95,2.26,2.47,2.26a2.78,2.78,0,0,0,2.14-1.15,12.54,12.54,0,0,0-10-20.16Z">
+                                       </path>
+                                    </svg></a>
+                     
+                                 <a style="font-size: 24px!important;" target="_blank"
+                                    href="/app/accounting/project/project.nl?id={{projectinternalid}}">{{projectid}}
+                                 </a><br />&emsp;&emsp;{{title}}</span>
+                           </span>
+                        </span>
+                     </div>
+                  
+                     <div class="col-sm p1">
+                        
+                        <div class="row mb-1">
+                           <div class="col-sm p1">
+                                                   <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Category
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">
+                              {{lob}}<br/>
+                              {{projecttype}}<br/>
+                              {{partnerpractice}}
+                           </span>
+                        </span>
+                           
+                                                   <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Billing Setup 
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{billingtype}} <br/> {{billingschedule}}</span>
+                        </span>
+
+                           </div>
+                           <div class="col-sm p1">
+                                                         <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                    Project Status
+                                 </span>
+                              </span>
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly">{{status}}</span>
+                              </span>
+                              <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                    Project Manager
+                                 </span>
+                              </span>
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly"><a target="_blank"
+                                       href="https://servicerocket.workplace.com/chat/t/{{pmworkplaceid}}">{{projectmanager}}</a></span>
+                              </span>
+                           </div>
+                        </div>
+                  
+                     </div>
+                  </div>
+                  <div class="row mb-1">
+                     <div class="col-sm p1">
+
+                     </div>
+                     <div class="col-sm p1">
+
+                     </div>
+                     <div class="col-sm p1">
+
+                     </div>
+                  </div>
+                  <div class="row mb-1">
+
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row mb-3">
+		<figure class="highcharts-figure">
+		    <div id="project-budget"></div>
+		</figure>
+		<script type="text/javascript">
+		var pbchart = Highcharts.chart('project-budget', {
+		    chart: {
+		        type: 'waterfall'
+		    },
+		    title: {
+		        text: 'Project Budget'
+		    },
+		    xAxis: {
+		        type: 'category'
+		    },
+
+		    yAxis: {
+		        title: {
+		            text: 'Hours'
+		        },
+		        plotBands: []
+		    },
+		    legend: {
+		        enabled: false
+		    },
+		    tooltip: {
+		        pointFormat: '<b>${point.y:,.2f}</b> Hours'
+		    },
+		    series: [{
+		        upColor: Highcharts.getOptions().colors[2],
+		        color: Highcharts.getOptions().colors[3],
+		        data: [
+						{{#tasks}}
+						{{#if (isboolean nonbillable) }}
+	            		{{else}}
+	            		{{#if (isboolean isparent)}}
+	            		
+			             	{ name: '{{name}}',
+			             	  y: {{plannedwork }},	
+			        		},
+		        		{{else}}
+			        		
+			        		
+		            		{{#unless (greaterthan parent 0)}}
+		            			{ name: '{{name}}',
+				             	  y: {{plannedwork}},	
+				        		},
+				        		
+			            		{{#if (greaterthan actualwork 0)}}
+				        		{ name: '{{name}} (actual)',
+					             	  y: -{{actualwork}},
+					             	 color: '#217AFF'
+					        	},
+			            		{{/if}}
+				        		
+
+		            		{{/unless}}
+					        	
+		            		{{#if (greaterthan parent 0)}}
+                           {{#if (greaterthan actualwork 0)}}
+				        		{ name: '{{name}} (actual)',
+					             	  y: -{{actualwork}},
+					             	 color: '#217AFF'
+					        	},
+			            		{{/if}}
+		            		{{/if}}
+			        	{{/if}}
+		        		{{/if}}
+		               {{/tasks}}
+		               
+	            	   {{#tasks}}
+						{{#if (isboolean nonbillable) }}
+	            		{{else}}
+		             		{{#if (isboolean isparent)}}
+	            		
+		            		{{else if (greaterthan remainingwork 0 )}}
+		            		{
+		            		name: '{{name}} (remaining)',
+		            		y: -{{remainingwork}},
+		                    color: '#FF8C3A'
+		             		},
+		            		{{/if}}
+		        		{{/if}}
+		               {{/tasks}}
+		               
+		            	   {
+		                       name: 'Customer Balance 🤝',
+		                       isSum: true,
+		                       color: 'black'
+		                   },
+		            	   {{#tasks}}
+							{{#if (isboolean nonbillable) }}
+		            		
+			             		{{#if (isboolean isparent)}}
+		            		
+			            		{{else if (greaterthan actualwork 0 )}}
+			            		{
+			            		name: '{{name}} 🆓',
+			            		y: -{{actualwork}},
+			                    color: '#FF3A20'
+			             		},
+			            		{{/if}}
+			            	{{else}}
+			        		{{/if}}
+			               {{/tasks}}
+			            	   {
+			                       name: 'Total Balance 💯',
+			                       isSum: true,
+			                       color: 'black'
+
+			                   }
+					],
+		        dataLabels: {
+		            enabled: true,
+		            formatter: function () {
+		                return Highcharts.numberFormat(this.y, 2, '.') + ' hrs';
+		            },
+		            style: {
+		            	fontWeight: 'bold',
+		            	textOutline: 'none'
+	                }
+		        },
+		        pointPadding: 0
+		    }]
+		});
+		
+	    var chart = $('#project-budget').highcharts();
+	    var extremes = chart.yAxis[0].getExtremes();
+	    var maxY = extremes.max;
+	    var minY = extremes.min;
+	    console.log(maxY);
+	    chart.yAxis[0].addPlotBand({ 
+            from: 0,
+            to: maxY,
+            color: 'rgba(123, 239, 178, 1)',
+            label: {
+                text: 'Target Range',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -100,
+                y: 20,
+                style: {
+                    color: '#606060'
+                }
+            }
+        });
+	    chart.yAxis[0].addPlotBand({ 
+            from: 0,
+            to: minY,
+            color: 'rgba(241, 130, 141,1)',
+            label: {
+                text: 'Over Budget',
+                align: 'left',
+                verticalAlign: 'bottom',
+                x: 30,
+                y: -10,
+                style: {
+                    color: '#606060'
+                }
+           }
+        });
+	    
+	    
+	    
+		
+	
+		</script>
+      </div>
+      <div class="row mb-3">
+         <ul class="nav nav-tabs mb-3" id="compenTab" role="tablist" style="list-style-type:none;">
+             <li class="nav-item" role="presentation">
+               <button class="nav-link active" id="timeline-tab" data-bs-toggle="tab" data-bs-target="#timeline" type="button"
+                  role="tab" aria-controls="timeline" aria-selected="true">Timeline</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="team-tab" data-bs-toggle="tab" data-bs-target="#team" type="button"
+                  role="tab" aria-controls="team" aria-selected="true">Team</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button"
+                  role="tab" aria-controls="tasks" aria-selected="true">Tasks</button>
+            </li>
+         </ul>
+         <div class="tab-content" id="compenTabContent">
+         
+         	<div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+               <div class="container">
+                   <div class="row mb-1">
+                   <div class="notice notice-{{ragstatus}}">
+			            <strong>{{ragsummary}}</strong><br/>
+			            {{ragauthor}}<br/>
+			            {{ragdate}}<br/>
+			            {{ragnotes}}<br/>
+			         </div>
+                   </div>
+    			</div>
+            </div>
+            
+            <div class="tab-pane fade" id="financials" role="tabpanel" aria-labelledby="financials-tab">
+               <div class="container">
+               	<div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Rate
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{currencysymbol}}{{currency projectrate}}</span>
+                        </span>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Budget in Amount
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{currencysymbol}}{{currency budgetamount}}</span>
+                        </span>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+								Budget in Hours
+                           </span>
+                        </span>
+						<span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{currency budgethours}}</span>
+                        </span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="team-tab">
+               <div class="container">
+                  <table id="table-team" class="table table-striped" style="width:100%">
+                     <thead>
+                        <tr>
+                           <th class="text-center">Rocketeer</th>
+                           <th class="text-center">Role</th>
+                           <!-- <th class="text-center">Cost</th> -->
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {{#team}}
+                        <tr>
+                           <td>{{resource}}</td>
+                           <td>{{role}}</td>
+                           <!-- <td class="text-end">{{@root.currencysymbol}}{{currency cost}}</td> -->
+                        </tr>
+                        {{/team}}
+                     </tbody>
+                  </table>
+    			</div>
+            </div>
+            <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+               <div class="container">
+                  <table id="table-task" class="table table-striped" style="width:100%">
+                     <thead>
+                        <tr>
+                           <th class="text-center">ID</th>
+                           <th class="text-center">Name</th>
+                           <th class="text-center">Status</th>
+<!--                            <th class="text-center">Start Date</th>
+                           <th class="text-center">End Date</th> -->
+                           <th class="text-center sum">Planned Work</th>
+                           <th class="text-center sum">Actual Work</th>
+                           <th class="text-center sum">Remaining Work</th>
+                           <th class="text-center">Used</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {{#tasks}}
+                        <tr>
+                        	<td>{{id}}</td>	
+                           <td>
+<!--                            {{#if (greaterthan parent 0)}}
+                           &emsp;
+                           {{else}}
+                           {{/if}} -->
+                           {{name}}</td>
+                           <td>{{status}}</td>
+<!--                            <td>{{startdate}}</td>
+                           <td>{{enddate}}</td> -->
+                           <td class="text-end">{{currency plannedwork}}</td>
+                           <td class="text-end">{{currency actualwork}}</td>
+                           <td class="text-end">{{currency remainingwork}}</td>
+                           <td class="text-end">{{currency percentcomplete}}%</td>
+                        </tr>
+                        {{/tasks}}
+                     </tbody>
+			        <tfoot>
+			            <tr>
+			            	<th></th>
+			                <th></th>
+			                <th class="text-end fw-bold">Totals</th>
+			                <th class="text-end fw-bold fst-italic"></th>
+			                <th class="text-end fw-bold fst-italic"></th>
+			                <th class="text-end fw-bold fst-italic"></th>
+			                <th></th>
+			            </tr>
+			        </tfoot>
+                  </table>
+    			</div>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>

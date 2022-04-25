@@ -1,0 +1,254 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Career Pathways</title>
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/assets/dashboard_portlets/2782337335.css?NS_VER=2020.2.0&minver=139" />
+      <style>
+         body {
+         background-color: #eff1f5;
+         font-size: 12px;
+         font-family: Tahoma;
+         color: #4d5f79;
+         }
+         .button-container {
+         display: flex;
+         flex-direction: row;
+         }
+         .ns-button {
+         margin: 0 12px 0 0;
+         padding: 9px 32px 8px 33px;
+         border-radius: 3px;
+         border: solid 1px #607799;
+         background-color: #ffffff;
+         color: #4d5f79;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         }
+         .container {
+         width: 100%;
+         }
+         .header {
+         padding: 12px;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         }
+         .row{
+         margin-top:40px;
+         padding: 0 10px;
+         width: 100%;
+         }
+         .clickable{
+         cursor: pointer;   
+         }
+         .panel-primary {
+         padding: 12px 12px 12px 12px;
+         border-radius: 5px;
+         box-shadow: 0 0 8px 0 rgba(195, 195, 195, 0.5);
+         background-color: #ffffff;
+         border: 0;
+         }
+         .panel-heading {
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         padding-bottom: 16px;
+         padding-top: 16px;
+         }
+         .panel-primary>.panel-heading {
+         background-color: unset;
+         border-color: 0;
+         border-bottom: 0;
+         letter-spacing: 1.19px;
+         color: #47617c;
+         }
+         .panel-primary>.panel-heading>.panel-title {
+         font-size: 20px;
+         font-weight: 600;
+         }
+         .panel-heading span {
+         margin-left: 8px;
+         font-size: 15px;  
+         letter-spacing: 1.19px;
+         color: #47617c;          
+         font-weight: 100;
+         }
+         .panel.panel-primary.secondary {
+         border: 2px solid #eff1f5;
+         box-shadow: unset;
+         }
+         h4.panel-subtitle {
+         font-size: 15px;
+         font-weight: bold;
+         color: #47617c;
+         margin: unset;
+         }
+         .tertiary {
+         color: #4d5f79 !important;
+         background-color: unset !important;
+         border-color: #eff1f5 !important;
+         }
+         .panel-info {
+         border-color: #eff1f5;
+         }
+         .tabbed-body {
+         padding-top: 4px;
+         padding-left: 60px;
+         padding-right: 16px;
+         }
+         h5, .h5 {
+         font-size: 14px;
+         font-weight: 700;
+         margin: unset;
+         color: #47617c;
+         }
+         .inner-card {
+         padding-top: 2px;
+         padding-bottom: 2px;
+         }
+         .inner-card>.panel-group {
+         margin-bottom: unset;
+         }
+         .owner-container {
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         }
+         .owner-label {
+         margin-left: 4px;
+         display: flex;
+         flex-direction: row;
+         }
+         .jobs {
+         display: flex;
+         flex-direction: column;
+         padding-top: 8px;
+         padding-bottom: 8px;
+         }
+         .competencies-header {
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         flex-direction: row;
+         }
+         .competencies {
+         border: 1px solid #eff1f5;
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         flex-direction: row;
+         }
+         .activity {
+         border: 1px solid #eff1f5;
+         border-radius: 2px;
+         padding: 8px;
+         margin-top: 2px;
+         padding-left: 16px;
+         font-size: 12px;
+         display: flex;
+         flex-direction: row;
+         }
+         .circle {
+         border-radius: 50%;
+         width: 50px;
+         height: 50px;
+         border: 1px solid #47617c;
+         margin-right: 10px;
+         }
+         .people-in-jobs {
+         display: flex;
+         flex-direction: row;
+         align-content: space-between;
+         }
+         div.minimalistBlack {
+         border: 0px solid #000000;
+         width: 100%;
+         text-align: left;
+         border-collapse: collapse;
+         }
+         .divtable.minimalistBlack .divtableCell, .divtable.minimalistBlack .divtableHead {
+         border: 1px solid #eff1f5;
+         padding: 5px 4px;
+         }
+         .divtable.minimalistBlack .divtableBody .divtableCell {
+         text-align: left;
+         font-size: 12px;
+         }
+         .divtable.minimalistBlack .divtableHeading {
+         background: #CFCFCF;
+         }
+         .divtable.minimalistBlack .divtableHeading .divtableHead {
+         font-weight: bold;
+         text-align: center;
+         word-wrap: break-word";
+         }
+         .minimalistBlack .tableFootStyle {
+         font-size: 14px;
+         }
+         .divtable{ display: table; }
+         .divtableRow { display: table-row; }
+         .divtableHeading { display: table-header-group;}
+         .divtableCell, .divtableHead { display: table-cell;}
+         .divtableHeading { display: table-header-group;}
+         .divtableFoot { display: table-footer-group;}
+         .divtableBody { display: table-row-group;}
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="row" style="max-width: 1000px;">
+			<div class="divtable minimalistBlack">
+			{{#each this}}
+				{{#if @first}}
+				
+				   <div class="divtableHeading">
+				      <div class="divtableRow">
+				      	{{#each this}}
+				         	<div class="divtableHead">{{this}}</div>
+				         {{/each}}
+				      </div>
+				   </div>
+				   
+				{{else}}
+					<div class="divtableBody">
+				      <div class="divtableRow">
+				      	{{#each this}}
+					      	{{#if @first}}
+					         	<div class="divtableHead"><b>{{this}}</b></div>
+					         {{else}}
+					         
+					         		<div class="divtableCell"> 
+						         		{{#each this}}
+						         		
+						         		{{#if this.opening}}
+<span>
+<img height="16" width="16" alt="🚀" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/images/emoji.php/v9/td9/1.5/32/1f680.png">
+</span>
+						         		{{/if}} 
+						         		
+						         		<a href="/app/site/hosting/scriptlet.nl?script=1320&deploy=1&jobid={{this.id}}" target="_blank">{{this.name}} ({{this.id}})</a> <br/>
+						         		{{else}}
+						         		{{/each}}
+					         		</div>
+					         {{/if}}   
+				         {{/each}}
+				      </div>
+				   </div>
+				{{/if}}   
+			 {{/each}}  
+			</div>
+         </div>
+      </div>
+   </body>
+</html>

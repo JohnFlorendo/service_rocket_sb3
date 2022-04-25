@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- css Bootstrap 3 -->
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" />
+
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/v/bs5/dt-1.11.3/af-2.3.7/b-2.0.1/date-1.1.1/fc-4.0.1/fh-3.2.0/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.0/sp-1.4.0/datatables.min.css" />
+
+	<!-- css dataTables.bootstrap.min.css -->
+	<link rel="stylesheet" type="text/css"
+		href="/core/media/media.nl?id=238381&c=3688201&h=I9fWmOJP6c4gn4h0tig3Rne5Frafa_afVNW5i2GJ6mTlF0pq&_xt=.css">
+
+	<!-- css rowGroup.dataTables.min.css -->
+	<link rel="stylesheet" type="text/css"
+		href="/core/media/media.nl?id=237236&c=3688201&h=qMSYc8XHCBpwg90rZ8RhsDp3bXdsiA4mOlbxXzS256H_bCzw&_xt=.css">
+
+	<!-- js jQuery -->
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+	<!-- js Datatable  -->
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/v/bs5/dt-1.11.3/af-2.3.7/b-2.0.1/date-1.1.1/fc-4.0.1/fh-3.2.0/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.0/sp-1.4.0/datatables.min.js"></script>
+
+	<!-- js Datatable Boostrap 3-->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+
+	<style type="text/css">
+		* {
+			font-size: 14px;
+			box-sizing: border-box;
+		}
+
+		ol,
+		ul {
+			padding-left: 0rem !important;
+		}
+
+		.text ul,
+		.text ol {
+
+			margin-left: 0px !important;
+		}
+
+		.nav {
+			display: flex !important;
+		}
+
+		.tab-content {
+			padding-left: 20px !important;
+		}
+
+		.table-caption {
+			caption-side: top;
+			width: auto;
+			text-align: center
+		}
+
+		.pagination {
+			display: flex !important;
+			list-style: none !important;
+		}
+
+		p.truncate {
+			width: 200px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			resize: horizontal;
+		}
+
+
+
+		.noaccess {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.loader {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			width: 120px;
+			height: 120px;
+			margin: -76px 0 0 -76px;
+			border: 16px solid #f3f3f3;
+			border-radius: 50%;
+			border-top: 16px solid #3498db;
+			-webkit-animation: spin 2s linear infinite;
+			animation: spin 2s linear infinite;
+		}
+
+		/* Safari */
+		@-webkit-keyframes spin {
+			0% {
+				-webkit-transform: rotate(0deg);
+			}
+
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+
+			$.get('/app/site/hosting/scriptlet.nl?script=1487&deploy=1&action=backend&list=pending', function (data) {
+
+				$(".loader").hide();
+
+				var arrDefs = [];
+
+				if (data.hide.length > 0) {
+					arrDefs.push({
+						visible: false,
+						targets: data.hide
+					});
+				}
+
+				if (data.truncate.length > 0) {
+					arrDefs.push({
+						render: function (data, type, row) {
+							return '<p class="truncate">' + data + '</p>';
+						},
+						targets: data.truncate
+					});
+				}
+
+				if (data.numeric.length > 0) {
+					arrDefs.push({
+						className: 'dt-body-right',
+						render: DataTable.render.number(',', '.', 2, ''),
+						targets: data.numeric
+					});
+				}
+
+				if (data.link.length > 0) {
+					arrDefs.push({
+						render: function (data, type, row) {
+							var arrData = data.split('+')
+
+							return '<a target="_blank" href="' + arrData[1] + '">' + arrData[0] + '</a>';
+						},
+						targets: data.link
+					});
+				}
+
+				if (data.currency.length > 0) {
+					arrDefs.push({
+						className: 'dt-body-right',
+						render: function (data, type, row, meta) {
+							return $.fn.dataTable.render.number(',', '.', 2, row[8] + ' ').display(data);
+						},
+						targets: data.currency
+					});
+				}
+
+				var dtSuiteTable = $('#table-pending').DataTable({
+					responsive: false,
+					data: data.data,
+					columns: data.header,
+					pageLength: 25,
+					columnDefs: arrDefs
+				});
+
+			}, 'json').fail(function (xhr, status, error) {
+				console.log("An AJAX error occured: " + status + "\nError: " + error);
+			});
+
+			$.get('/app/site/hosting/scriptlet.nl?script=1487&deploy=1&action=backend&list=approved', function (data) {
+
+				$(".loader").hide();
+
+				var arrDefs = [];
+
+				if (data.hide.length > 0) {
+					arrDefs.push({
+						visible: false,
+						targets: data.hide
+					});
+				}
+
+				if (data.truncate.length > 0) {
+					arrDefs.push({
+						render: function (data, type, row) {
+							return '<p class="truncate">' + data + '</p>';
+						},
+						targets: data.truncate
+					});
+				}
+
+				if (data.numeric.length > 0) {
+					arrDefs.push({
+						className: 'dt-body-right',
+						render: DataTable.render.number(',', '.', 2, ''),
+						targets: data.numeric
+					});
+				}
+
+				if (data.link.length > 0) {
+					arrDefs.push({
+						render: function (data, type, row) {
+							var arrData = data.split('+')
+
+							return '<a target="_blank" href="' + arrData[1] + '">' + arrData[0] + '</a>';
+						},
+						targets: data.link
+					});
+				}
+
+				if (data.currency.length > 0) {
+					arrDefs.push({
+						className: 'dt-body-right',
+						render: function (data, type, row, meta) {
+							return $.fn.dataTable.render.number(',', '.', 2, row[8] + ' ').display(data);
+						},
+						targets: data.currency
+					});
+				}
+
+				var dtSuiteTable = $('#table-approved').DataTable({
+					responsive: false,
+					data: data.data,
+					columns: data.header,
+					pageLength: 25,
+					columnDefs: arrDefs
+				});
+
+			}, 'json').fail(function (xhr, status, error) {
+				$(".loader").hide();
+				console.log("An AJAX error occured: " + status + "\nError: " + error);
+			});
+
+			$.get('/app/site/hosting/scriptlet.nl?script=1487&deploy=1&action=backend&list=mine', function (data) {
+
+				$(".loader").hide();
+
+				var arrDefs = [];
+
+				if (data.hide.length > 0) {
+					arrDefs.push({
+						visible: false,
+						targets: data.hide
+					});
+				}
+
+				if (data.truncate.length > 0) {
+					arrDefs.push({
+						render: function (data, type, row) {
+							return '<p class="truncate">' + data + '</p>';
+						},
+						targets: data.truncate
+					});
+				}
+
+				if (data.numeric.length > 0) {
+					arrDefs.push({
+						className: 'dt-body-right',
+						render: DataTable.render.number(',', '.', 2, ''),
+						targets: data.numeric
+					});
+				}
+
+				if (data.link.length > 0) {
+					arrDefs.push({
+						render: function (data, type, row) {
+							var arrData = data.split('+')
+
+							return '<a target="_blank" href="' + arrData[1] + '">' + arrData[0] + '</a>';
+						},
+						targets: data.link
+					});
+				}
+
+				if (data.currency.length > 0) {
+					arrDefs.push({
+						className: 'dt-body-right',
+						render: function (data, type, row, meta) {
+							return $.fn.dataTable.render.number(',', '.', 2, row[8] + ' ').display(data);
+						},
+						targets: data.currency
+					});
+				}
+
+				var dtSuiteTable = $('#table-mine').DataTable({
+					responsive: false,
+					data: data.data,
+					columns: data.header,
+					pageLength: 25,
+					columnDefs: arrDefs
+				});
+
+			}, 'json').fail(function (xhr, status, error) {
+				$(".loader").hide();
+				console.log("An AJAX error occured: " + status + "\nError: " + error);
+			});
+		});
+
+	</script>
+
+</head>
+
+<body>
+	<div class="loader"></div>
+
+	<ul class="nav nav-tabs" id="myTab" role="tablist" style="list-style-type:none!important">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending"
+				type="button" role="tab" aria-controls="pending" aria-selected="true">My Team's PRs (Pending)</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved" type="button"
+				role="tab" aria-controls="approved" aria-selected="false">My Team's PRs (Approved)</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="mine-tab" data-bs-toggle="tab" data-bs-target="#mine" type="button"
+				role="tab" aria-controls="mine" aria-selected="false">My PRs</button>
+		</li>
+	</ul>
+
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="tab-pending">
+			<br />
+	<p>Here are all the <strong>Purchase Requisitions</strong> that require either your approval or your manager's approval. You can sort the list based on <strong>"Approver"</strong> name or <strong>"Date"</strong> as you need.</p>
+<p>Please click on the link for the relevant PR to see the details of the request.</p>
+			<table id="table-pending" class="table table-striped" style="width:100%"></table>
+		</div>
+		<div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="tab-approved">
+			<br />
+			<p>Here are all the <strong>Purchase Requisitions</strong> that are fully approved and are being processed for <strong>Purchase Order</strong> (PO) and <strong>Payment</strong>.</p>
+			<table id="table-approved" class="table table-striped" style="width:100%"></table>
+		</div>
+		<div class="tab-pane fade" id="mine" role="tabpanel" aria-labelledby="tab-mine">
+			<br />
+			<p>Here are all the <strong>Purchase Requisitions</strong> that are raised by you. You can sort this list based on <strong>"Approval"</strong> status or <strong>"Date"</strong> as you need.</p>
+			<table id="table-mine" class="table table-striped" style="width:100%"></table>
+		</div>
+	</div>
+</body>
+
+</html>

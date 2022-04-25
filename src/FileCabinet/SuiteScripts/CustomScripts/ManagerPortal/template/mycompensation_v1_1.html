@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
+   <script src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/modules/xrange.js"></script>
+   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+   <style type="text/css">
+      * {
+         font-size: 14px;
+         box-sizing: border-box;
+      }
+      ol,
+      ul {
+         padding-left: 0rem !important;
+      }
+      
+      .nav {
+         display: flex !important;
+      }
+
+      .tab-content {
+         padding-left: 20px !important;
+      }
+
+      .table-caption {
+         caption-side: top;
+         width: auto;
+         text-align: center
+      }
+
+      .pagination {
+         display: flex !important;
+         list-style: none !important;
+      }
+      .highcharts-figure,
+      .highcharts-data-table table {
+         width: 70%;
+         margin: 1em auto;
+      }
+
+      .highcharts-data-table table {
+         font-family: Verdana, sans-serif;
+         border-collapse: collapse;
+         border: 1px solid #EBEBEB;
+         margin: 10px auto;
+         width: 80%;
+      }
+
+      .highcharts-data-table caption {
+         padding: 1em 0;
+         font-size: 1.2em;
+         color: #555;
+      }
+
+      .highcharts-data-table th {
+         font-weight: 600;
+         padding: 0.5em;
+      }
+
+      .highcharts-data-table td,
+      .highcharts-data-table th,
+      .highcharts-data-table caption {
+         padding: 0.5em;
+      }
+
+      .highcharts-data-table thead tr,
+      .highcharts-data-table tr:nth-child(even) {
+         background: #f8f8f8;
+      }
+
+      .highcharts-data-table tr:hover {
+         background: #f1f7ff;
+      }
+
+      .highcharts-credits {
+         font-size: 0px !important;
+      }
+
+      .noaccess {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+      }
+
+      .amount-label {}
+   </style>
+</head>
+
+<body>
+
+
+   <div class="container-md">
+      <div class="row mb-3">
+         <div class="d-flex">
+            <div class="flex-shrink-0 align-items-center">
+               <img class="mb-3" width="250px" src="{{image}}" alt="{{entityid}}">
+               <span class="inputreadonly"><br/><a target="_blank"
+                                 href="https://3688201.app.netsuite.com/app/common/entity/editprofile.nl?e=T">Update My Profile</a></span>
+            </div>
+            <div class="flex-grow-1 ms-3">
+               <div class="container">
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Name
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{name}}</span>
+                        </span>
+                     </div>
+
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Job Profile
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{job}}</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Employee #
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{employeenum}}</span>
+                        </span>
+                     </div>
+
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Job Level
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{joblevelname}} ({{joblevelnumber}})</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Manager
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{supervisor}}</span>
+                        </span>
+                     </div>
+
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              HR Manager
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly"><a target="_blank"
+                                 href="https://servicerocket.workplace.com/chat/t/{{hrmanagerworkplaceid}}">{{hrmanager}}</a></span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Subsidiary
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{subsidiary}}</span>
+                        </span>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Location
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{location}}</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Start Date
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{hiredate}}</span>
+                        </span>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Spirit Animal
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                                                      <a target="_blank"
+                              href="https://www.google.com/search?q={{animal}}">{{animal}}</a>
+
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Last Salary Review
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{lastreviewdate}}</span>
+                        </span>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label">
+                           <span class="smallgraytextnolink">
+                              Next Salary Review
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly">{{nextreviewdate}}</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink">
+                           <span class="smallgraytextnolink">
+                  
+                              📙 <a target="_blank" href="https://servicerocket.workplace.com/work/knowledge/1260269601035536">Rocketeer
+                                 Handbook</a>
+                           </span>
+                        </span>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label">
+                           <span class="smallgraytextnolink">
+                              Kolbe MO
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                                <a target="_blank" href="{{kolbereport}}">{{kolbemo}}</a>
+                              	<a target="_blank" href="{{kolbedownload}}"><img src="https://www.warewithal.com/cache/KolbeA_{{kolbegauge}}_0000.png" style="width:20px;height:20px;"></a>
+
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink">
+                           <span class="smallgraytextnolink">
+                           📘 <a target="_blank" href="{{subsidiaryhandbook}}">Country Addendum</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{subsidiary}}
+                  
+                           </span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <div class="alert alert-info" role="alert">
+                           If you spot any error, inconsistencies or have any questions relating to data on this page,
+                           please contact <a target="_blank"
+                              href="https://servicerocket.workplace.com/chat/t/{{hrmanagerworkplaceid}}">{{hrmanager}}</a>
+                           your designated HR Manager as listed above.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row mb-3">
+         <ul class="nav nav-tabs mb-3" id="compenTab" role="tablist" style="list-style-type:none;">
+         
+            <li class="nav-item" role="presentation">
+               <button class="nav-link active" id="workcalendar-tab" data-bs-toggle="tab" data-bs-target="#workcalendar"
+                  type="button" role="tab" aria-controls="workcalendar" aria-selected="false">Work Calendar</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="wage-tab" data-bs-toggle="tab" data-bs-target="#wage" type="button"
+                  role="tab" aria-controls="home" aria-selected="true">Wage</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="allowance-tab" data-bs-toggle="tab" data-bs-target="#allowance"
+                  type="button" role="tab" aria-controls="allowance" aria-selected="false">Allowance</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="bonus-tab" data-bs-toggle="tab" data-bs-target="#bonus" type="button"
+                  role="tab" aria-controls="bonus" aria-selected="false">Bonus</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="bonus-tab" data-bs-toggle="tab" data-bs-target="#benefit" type="button"
+                  role="tab" aria-controls="bonus" aria-selected="false">Available Benefits (Beta)</button>
+            </li>
+         </ul>
+         <div class="tab-content" id="compenTabContent">
+            <div class="tab-pane fade show active" id="workcalendar" role="tabpanel" aria-labelledby="workcalendar-tab">
+               <p class="text-center fst-italic">My Work Calendar is {{location}}</p>
+               <figure class="highcharts-figure">
+                  <div id="chart-workcalendar"></div>
+               </figure>
+            </div>
+            
+            <div class="tab-pane fade" id="wage" role="tabpanel" aria-labelledby="wage-tab">
+               <div class="container">
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                    Base Wage
+                                 </span>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly">{{basewagetype}}</span>
+                              </span>
+                           </div>
+                           <div class="col-sm text-end">
+                              {{currencysymbol}}{{currency basewage}}
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Payroll Provider
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly"><a target="_blank"
+                                 href="{{payrollurl}}">{{payrollprovider}}</a></span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                    Variable (STF) 🍇
+                                 </span>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly">Variable (STF)</span>
+                              </span>
+                           </div>
+                           <div class="col-sm text-end">
+                              {{currencysymbol}}{{currency variable}}
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm p3">
+                        <span class="smallgraytextnolink uir-label ">
+                           <span class="smallgraytextnolink">
+                              Bonus Target
+                           </span>
+                        </span>
+                        <span class="uir-field inputreadonly">
+                           <span class="inputreadonly text-capitalize">{{bonustargetpayfrequency}} </span> <span
+                              class="inputreadonly"> {{bonustargettype}} {{currencysymbol}}{{currency freqbonus}}</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                     STF Ratio
+                                 </span>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly">STF Ratio</span>
+                              </span>
+                           </div>
+                           <div class="col-sm text-end">
+                              {{variablepercent}}%
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm p3">
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                     STF Guideline ({{stfguidelinefrom}})
+                                 </span>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly">STF Guideline</span>
+                              </span>
+                           </div>
+                           <div class="col-sm text-end">
+                              {{currency stfguideline}}%
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <div class="col-sm p3">
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="smallgraytextnolink uir-label ">
+                                 <span class="smallgraytextnolink">
+                                    Total Cash Compensation (TCC)
+                                 </span>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm">
+                              <span class="uir-field inputreadonly">
+                                 <span class="inputreadonly"></span>
+                              </span>
+                           </div>
+                           <div class="col-sm text-end">
+                              {{currencysymbol}}{{currency totalcompen}}
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                           <div class="col-sm">
+
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm p3">
+
+                     </div>
+                  </div>
+
+
+                  <div>
+
+                     <table id="table-salary" class="table table-striped" style="width:100%">
+
+                        <caption class="table-caption">
+                           <h4>Total Cash Compensation History</h4>
+                        </caption>
+
+                        <thead>
+                           <tr>
+                              <th class="text-center">ID</th>
+                              <th class="text-center">Effective Date</th>
+                              <th class="text-center">Base</th>
+                              <th class="text-center">Variable</th>
+                              <th class="text-center">Total Cash Compensation (TCC)</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {{#compensationhistory}}
+                           <tr>
+                              <td>{{id}}</td>
+                              <td>{{effectivedate}}</td>
+                              <td class="text-end">{{@root.currencysymbol}}{{currency wage}}</td>
+                              <td class="text-end">{{@root.currencysymbol}}{{currency variable}}</td>
+                              <td class="text-end">{{@root.currencysymbol}}{{currency tcc}}</td>
+                           </tr>
+                           {{/compensationhistory}}
+                        </tbody>
+                     </table>
+
+                  </div>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="allowance" role="tabpanel" aria-labelledby="allowance-tab">
+               <div class="container">
+
+                  <table id="table-allowance" class="table table-striped" style="width:100%">
+
+                     <caption class="table-caption">
+                        <h4>Allowances</h4>
+                     </caption>
+
+                     <thead>
+                        <tr>
+                           <th class="text-center">ID</th>
+                           <th class="text-center">Type</th>
+                           <th class="text-center">Start Date</th>
+                           <th class="text-center">End Date</th>
+                           <th class="text-center">Amount</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {{#allowance}}
+                        <tr>
+                           <td>{{id}}</td>
+                           <td>{{type}}</td>
+                           <td>{{startdate}}</td>
+                           <td>{{enddate}}</td>
+                           <td class="text-end">{{@root.currencysymbol}}{{currency amount}}</td>
+                        </tr>
+                        {{/allowance}}
+                     </tbody>
+                  </table>
+               </div>
+
+            </div>
+            <div class="tab-pane fade" id="bonus" role="tabpanel" aria-labelledby="bonus-tab">
+               <p class="text-center fst-italic">Bonus payment historical data has been loaded from the following dates:
+                  Chile, Australia: January 2016 United States: Jan 2017</p>
+
+               <div class="container">
+                  <table id="table-bonus" class="table table-striped" style="width:100%">
+                     <caption class="table-caption">
+                        <h4>Bonus History</h4>
+                     </caption>
+
+                     <thead>
+                        <tr>
+                           <th class="text-center">ID</th>
+                           <th class="text-center">Type</th>
+                           <th class="text-center">Amount</th>
+                           <th class="text-center">Currency</th>
+                           <th class="text-center">Date</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {{#bonus}}
+                        <tr>
+                           <td>{{id}}</td>
+                           <td>{{bonustype}}</td>
+                           <td class="text-end">{{@root.currencysymbol}}{{currency amount}}</td>
+                           <td>{{bonuscurrency}}</td>
+                           <td>{{awarddate}}</td>
+                        </tr>
+                        {{/bonus}}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+    
+            <div class="tab-pane fade" id="benefit" role="tabpanel" aria-labelledby="benefit-tab">
+               <p class="text-center fst-italic">The data is not yet final and we are working to have the data uploaded.</p>
+
+               <div class="container">
+                  <table id="table-bonus" class="table table-striped" style="width:100%">
+
+                     <thead>
+                        <tr>
+
+                           <th class="text-center">Type</th>
+                           <th class="text-center">Carrier</th>
+                           <th class="text-center">Description</th>
+                           <th class="text-center">Monthly Employee Cost</th>
+                           <th class="text-center">Monthly Employer Cost</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {{#benefit}}
+                        <tr>
+                           <td>{{type}}</td>
+                           <td>{{carrier}}</td>
+                           <td>{{description}}</td>
+                           <td>{{employeecost}}</td>
+                           <td>{{employercost}}</td>
+                        </tr>
+                        {{/benefit}}
+                     </tbody>
+                  </table>
+               </div>
+            </div>        
+
+            <script>
+               Highcharts.chart('chart-workcalendar', {
+                  chart: {
+                     type: 'xrange'
+                  },
+                  title: {
+                     text: 'Public Holiday Calendar'
+                  },
+                  xAxis: {
+                     type: 'datetime',
+                     labels: {
+                        format: '{value:%d/%b/%y}'
+                     }
+                  },
+                  yAxis: {
+                     title: {
+                        text: 'Work Calendar'
+                     },
+                     categories: ['Palo Alto', 'Sydney', 'Melbourne', 'Brisbane', 'Kuala Lumpur', 'Santiago', 'Bengaluru', 'London', 'Singapore', 'Toronto'],
+                     reversed: true
+                  },
+                  tooltip: {
+                     formatter: function () {
+
+                        return this.key;
+                     }
+                  },
+                  series: [{
+                        name: 'Public Holiday Calendar',
+                        borderColor: 'none',
+                        pointWidth: 20,
+                        data: [
+                        	{{#holiday}}
+                        	{
+                           		color: 'rgb(220,220,220)',
+                           		x: Date.UTC({{yyyy}}, {{mm}}, {{d1}}),
+                           		x2: Date.UTC({{yyyy}},{{mm}}, {{d2}}),
+                           		y: {{axis}},
+                           		name: '{{name}}<br/>{{date}}',
+                           		type: '{{type}}' 
+                           },
+                           {{/holiday}}
+                           ],
+                        dataLabels: {
+                           enabled: true,
+                           format: '{point.type}'
+                        }
+                     }]
+
+               });
+            </script>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>

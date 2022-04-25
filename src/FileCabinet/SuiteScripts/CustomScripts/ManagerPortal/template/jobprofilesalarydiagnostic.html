@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Job Family Diagnostic</title>
+		<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+		
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/modules/dumbbell.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+		
+		<style type="text/css">
+			.highcharts-figure,
+			.highcharts-data-table table {
+				width: 70%;
+				margin: 1em auto;
+			}
+
+			.highcharts-data-table table {
+				font-family: Verdana, sans-serif;
+				border-collapse: collapse;
+				border: 1px solid #EBEBEB;
+				margin: 10px auto;
+				width: 80%;
+			}
+
+			.highcharts-data-table caption {
+				padding: 1em 0;
+				font-size: 1.2em;
+				color: #555;
+			}
+
+			.highcharts-data-table th {
+				font-weight: 600;
+				padding: 0.5em;
+			}
+
+			.highcharts-data-table td,
+			.highcharts-data-table th,
+			.highcharts-data-table caption {
+				padding: 0.5em;
+			}
+
+			.highcharts-data-table thead tr,
+			.highcharts-data-table tr:nth-child(even) {
+				background: #f8f8f8;
+			}
+
+			.highcharts-data-table tr:hover {
+				background: #f1f7ff;
+			}
+
+			.highcharts-credits {
+				font-size: 0px !important;
+			}
+
+			.noaccess {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	    
+	    <style>
+         .careertable {
+         border-spacing: 0;
+         table-layout: fixed;
+         }
+         .careertable thead th {
+         padding: 3px;
+         position: sticky;
+         top: 0;
+         z-index: 1;
+         width: 25vw;
+         background: white;
+         }
+         .careertable td {
+
+         padding: 4px 5px;
+         text-align: left;
+         vertical-align: top!important;
+         }
+         .careertable tbody th {
+         text-align: left;
+         position: relative;
+         }
+         .careertable thead th:first-child {
+         position: sticky;
+         left: 0;
+         z-index: 2;
+         }
+         .careertable tbody th {
+         position: sticky;
+         left: 0;
+         background: white;
+         z-index: 1;
+         }
+         caption {
+         text-align: left;
+         padding: 0.25rem;
+         position: sticky;
+         left: 0;
+         }
+         [role="region"][aria-labelledby][tabindex] {
+         max-width: 95vw;
+         max-height: 80vh;
+         overflow: auto;
+         }
+         [role="region"][aria-labelledby][tabindex]:focus {
+
+         outline: 0;
+         }
+
+         .bg-secondary{
+        	 background: #607799 !important;
+         }
+         
+      </style>
+	</head>
+	<body>
+		<div role="region" aria-labelledby="caption" tabindex="0">
+		<!-- <div role="region" aria-labelledby="caption" tabindex="0"> -->
+			<table class="careertable">
+				<thead>
+					<tr>
+						<th class= "bg-light"  style="width: 15rem;"></th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>USD</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>AUD</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>MYR</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>CLP</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>INR</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>GBP</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>SGD</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+	                  	<th class= "bg-light"  style="width: 45rem;">
+	                    	<div class="m-2 card" style="width: 42rem;">
+	                        	<div class="p-2 text-white bg-secondary card-header">
+	                           		<strong>CAD</strong>	
+	                        	</div>
+	                     	</div>
+	                  	</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF001</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>		
+							<figure class="highcharts-figure">
+								<div id="chartJF001USD"></div>
+							</figure>
+						</td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF001CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF002</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF002AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF002AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF002MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF002CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF002INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF002GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF002SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF002CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF003</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF003USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF003AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF003MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF003CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF003INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF003GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF003SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF003CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF004</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF004USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF004AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF004MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF004CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF004INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF004GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF004SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF004CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF005</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF005USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF005AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF005MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF005CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF005INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF005GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF005SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF005CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF006</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF006USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF006AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF006MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF006CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF006INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF006GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF006SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF006CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF007</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF007USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF007AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF007MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF007CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF007INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF007GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF007SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF007CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF008</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF008USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF008AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF008MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF008CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF008INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF008GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF008SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF008CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF009</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF009USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF009AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF009MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF009CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF009INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF009GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF009SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF009CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF010</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF010USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF010AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF010MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF010CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF010INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF010GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF010SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF010CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF011</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF011USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF011AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF011MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF011CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF011INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF011GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF011SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF011CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF012</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF012USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF012AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF012MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF012CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF012INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF012GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF012SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF012CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF013</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF013USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF013AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF013MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF013CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF013INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF013GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF013SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF013CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF014</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF014USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF014AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF014MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF014CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF014INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF014GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF014SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF014CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF015</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF015USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF015AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF015MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF015CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF015INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF015GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF015SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF015CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF016</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF016USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF016AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF016MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF016CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF016INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF016GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF016SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF016CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF017</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF017USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF017AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF017MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF017CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF017INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF017GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF017SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF017CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+					<tr>
+					    <th class="align-top bg-light">
+		      				<div class="m-2 card" style="width: 12rem;">	
+	           					<div class="p-2 text-white bg-secondary card-header">
+	              					<strong>JF018</strong>	
+	           					</div>
+			 				<div>
+					    </th>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF018USD"></div>
+							</figure>
+					    </td>
+					    <td>
+							<figure class="highcharts-figure">
+								<div id="chartJF018AUD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF018MYR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF018CLP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF018INR"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF018GBP"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF018SGD"></div>
+							</figure>
+					    </td>
+					    <td>
+					    	<figure class="highcharts-figure">
+								<div id="chartJF018CAD"></div>
+							</figure>
+					    </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	
+		
+<!-- 	<figure class="highcharts-figure">
+			<div id="container{{id}}"></div>
+		</figure> -->
+		
+		
+		
+		
+		<script type="text/javascript">
+		
+		{{#each this}}
+		
+		/*HighchartsScript*/
+		
+		Highcharts.chart('chart{{chart}}', {
+
+		    chart: {
+		        type: 'dumbbell',
+		        inverted: true
+		    },
+
+		    legend: {
+		        enabled: false
+		    },
+
+		    subtitle: {
+		        text: 'Salary Range: Currency {{currency}}'
+		    },
+
+		    title: {
+		        text: 'Job Family: {{family}}'
+		    },
+
+		    tooltip: {
+		        shared: true
+		    },
+
+		    xAxis: {
+		        type: 'category'
+		    },
+
+		    yAxis: {
+		        title: {
+		            text: 'Amount'
+		        }
+		    },
+
+		    series: [{
+		        name: 'Range',
+		        data: {{{range}}}
+		    },
+		    	{{#each series}}
+			    {
+			        type: 'scatter',
+			        name: '{{name}}',
+			        data: [{
+			            name: '{{{title}}}',
+			            y: {{compen}},
+			            color: Highcharts.getOptions().colors[2] 
+			        }],
+	
+			        showInLegend: false,
+			        dataLabels: {
+			            enabled: false
+			       	},
+			        tooltip: {
+			            pointFormat: '{point.y}'
+			        }
+		        },
+		        {{/each}}
+		    ]
+
+		});
+		/*HighchartsScript*/
+		{{/each}}
+		</script>
+
+	</body>
+</html>
