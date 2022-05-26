@@ -19,9 +19,22 @@ function(record, employeetree) {
 		return  employeetree.update(option);
 	};
 	
+	getDirectReport = function(option){
+		
+		return employeetree.getDirectReport(option);
+	};
+	
+	getAllReport = function(option){
+		
+		return employeetree.getAllReport(option);
+	};
+	
+	
     return {
 		updateFuncMapFields: updateFuncMapFields,
-		updateEmployeeTree: updateEmployeeTree
+		updateEmployeeTree: updateEmployeeTree,
+		getDirectReport: getDirectReport,
+		getAllReport: getAllReport
     };
     
 });

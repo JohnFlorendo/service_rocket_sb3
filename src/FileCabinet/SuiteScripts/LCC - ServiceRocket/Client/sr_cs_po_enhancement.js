@@ -9,8 +9,6 @@ define(['N/search', 'N/record'],
      * @param{currentRecord} currentRecord
      */
     function (search, record) {
-        var ServiceRocket_Sdn_Bhd = 10;
-        var VAT_MY_UNDEF_MY = 60;
 
         function pageInit(scriptContext) {
             var currRecord = scriptContext.currentRecord;
@@ -74,7 +72,6 @@ define(['N/search', 'N/record'],
                 fieldId: 'createdfrom'
             });
 
-            // var arrData = searchRequisitionLineItems(currRecord, inRequisitionId);
             var arrData = recordRequisitionLineItems(currRecord, inRequisitionId);
 
             for (var indxArrData = 0; indxArrData < arrData.length; indxArrData++) {
@@ -88,18 +85,6 @@ define(['N/search', 'N/record'],
                         setLineItem(currRecord, indx, valueField);
                     }
                 }
-                // var valueField = arrData[indxArrData];
-                // console.log('valueField: ' + JSON.stringify(valueField));
-                // var lineNumber = currRecord.findSublistLineWithValue({
-                //     sublistId: 'item',
-                //     fieldId: 'item',
-                //     value: valueField.inItem
-                // });
-                //
-                // console.log('lineNumber: ' + lineNumber);
-                // if (lineNumber != -1) {
-                //     setLineItem(currRecord, lineNumber, valueField);
-                // }
             }
         }
 
@@ -110,50 +95,41 @@ define(['N/search', 'N/record'],
             });
             currRecord.setCurrentSublistValue({
                 sublistId: 'item',
+                fieldId: 'item',
+                value: valueField.inItem,
+                ignoreFieldChange: true
+            });
+            currRecord.setCurrentSublistValue({
+                sublistId: 'item',
                 fieldId: 'rate',
                 value: valueField.inEstimatedRate,
-                // ignoreFieldChange: true
+                ignoreFieldChange: true
             });
             currRecord.setCurrentSublistValue({
                 sublistId: 'item',
                 fieldId: 'amount',
                 value: valueField.inEstimatedAmount,
-                // ignoreFieldChange: true
+                ignoreFieldChange: true
             });
 
             var inGSTAmount = currRecord.getCurrentSublistValue({
                 sublistId: 'item',
                 fieldId: 'custcol_gst_amount'
             });
-
             var inGrossAmount = valueField.inEstimatedAmount + inGSTAmount;
-
             currRecord.setCurrentSublistValue({
                 sublistId: 'item',
                 fieldId: 'grossamt',
                 value: inGrossAmount,
-                // ignoreFieldChange: true
+                ignoreFieldChange: true
             });
-            // if (valueField.inGSTCode) {
-            //     currRecord.setCurrentSublistValue({
-            //         sublistId: 'item',
-            //         fieldId: 'taxcode',
-            //         value: valueField.inGSTCode,
-            //         // ignoreFieldChange: true
-            //     });
-            // } else {
-            //     var inSubsidiary = currRecord.getValue({
-            //         fieldId: 'subsidiary'
-            //     });
-            //     if (inSubsidiary == ServiceRocket_Sdn_Bhd) {
-            //         currRecord.setCurrentSublistValue({
-            //             sublistId: 'item',
-            //             fieldId: 'taxcode',
-            //             value: VAT_MY_UNDEF_MY,
-            //             // ignoreFieldChange: true
-            //         });
-            //     }
-            // }
+            currRecord.setCurrentSublistValue({
+                sublistId: 'item',
+                fieldId: 'taxcode',
+                value: valueField.inGSTCode,
+                ignoreFieldChange: true
+            });
+
             currRecord.commitLine({
                 sublistId: 'item'
             });
@@ -200,40 +176,6 @@ define(['N/search', 'N/record'],
 
             return arrData;
         }
-
-
-        // function searchRequisitionLineItems(currRecord, inRequisitionId) {
-        //     var objData = {};
-        //     var arrData = [];
-        //
-        //     var objSearchRequisitionLineItems = search.load({id: 'customsearch_sr_pr_line_item_fields'});
-        //     var filters = objSearchRequisitionLineItems.filters;
-        //     filters.push({name: "internalid", operator: "anyof", values: inRequisitionId});
-        //     objSearchRequisitionLineItems.filters = [];
-        //     objSearchRequisitionLineItems.filters = filters;
-        //
-        //     var searchResultCount = objSearchRequisitionLineItems.runPaged().count;
-        //
-        //     if (searchResultCount != 0) {
-        //         objSearchRequisitionLineItems.run().each(function (result) {
-        //             objData = {
-        //                 inItem: result.getValue({name: 'item'}),
-        //                 inEstimatedRate: result.getValue({name: 'formulacurrency'}),
-        //                 // inEstimatedRate: result.getValue(objSearchRequisitionLineItems.columns[1]),
-        //                 inEstimatedAmount: result.getValue({name: 'estimatedamount'}),
-        //                 // inEstimatedAmount: result.getValue(objSearchRequisitionLineItems.columns[2]),
-        //                 inRate: result.getValue({name: 'rate'}),
-        //                 inFXRate: result.getValue({name: 'fxrate'}),
-        //                 inGSTCode: result.getValue({name: 'custcol_gst_taxcode'})
-        //             };
-        //
-        //             arrData.push(objData);
-        //             return true;
-        //         });
-        //     }
-        //
-        //     return arrData;
-        // }
 
         return {
             pageInit: pageInit,

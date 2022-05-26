@@ -3,12 +3,12 @@
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  */
-define(['N/record', 'N/runtime', 'N/file', 'N/url', 'N/ui/serverWidget', '../../Library/handlebars', '../api/employee', '../../Box/box' ],
+define(['N/record', 'N/runtime', 'N/file', 'N/url', 'N/ui/serverWidget', '../../Library/handlebars', '../api/employee', '../../Box/box', '../../Workplace/api/workplace'],
 /**
  * @param {record} record
  * @param {runtime} runtime
  */
-function(record, runtime, file, url, serverWidget, handlebars, employee, box ) {
+function(record, runtime, file, url, serverWidget, handlebars, employee, box, workplace) {
    
     /**
      * Function definition to be triggered before record is loaded.
@@ -73,7 +73,7 @@ function(record, runtime, file, url, serverWidget, handlebars, employee, box ) {
      * @Since 2015.2
      */
 	beforeSubmit = function (scriptContext) {
-
+            
     };
 
     /**
@@ -89,7 +89,22 @@ function(record, runtime, file, url, serverWidget, handlebars, employee, box ) {
 
     	var newRecord = scriptContext.newRecord;
     	var oldRecord = scriptContext.oldRecord;
-    	
+
+        var recCurrent = record.load({
+            type: newRecord.type,
+            id: newRecord.id
+        })
+
+        try{
+            workplace.updateSkillSet({
+                recRecord: recCurrent,
+                stWorkplaceId: recCurrent.getValue({fieldId: 'custentity_workplace_id'})
+            })
+        }catch(err) {
+            log.error('an error occured', err)
+        }
+       
+
         log.audit({
             title: 'afterSubmit',
             details: 'afterSubmit: ' + scriptContext.type
